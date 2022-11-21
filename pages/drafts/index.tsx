@@ -1,10 +1,8 @@
-import { MainLayout } from "../components/layout/";
-import { MailCard } from "../components/mail";
-import { Divider } from "../components/ui";
-import { MailData } from "../interfaces";
-import { getMailList } from "../services/mail";
-import LeftArrowIcon from "../public/arrow-left.svg";
-import RightArrowIcon from "../public/arrow-right.svg";
+import { MainLayout } from "../../components/layout/";
+import { MailCard } from "../../components/mail";
+import { Divider } from "../../components/ui";
+import { MailData } from "../../interfaces";
+import { getMailList } from "../../services/mail";
 
 const selectedMail: MailData = {
   id: "1",
@@ -42,25 +40,13 @@ const headerMenuOptions: menuOption[] = [
   },
 ];
 
-export default function Home() {
+export default function InboxPage() {
   const mailList = getMailList();
 
   return (
     <MainLayout>
       <div className=" px-3">
         <div className="flex text-stroke">{}</div>
-        {/*content header menu */}
-        {headerMenuOptions.map((opt, idx) => (
-          <button
-            key={idx}
-            className={
-              (opt.title === selectedFeed ? "bg-accent " : "") +
-              "px-3 py-1 mx-1 rounded-lg"
-            }
-          >
-            {opt.title}
-          </button>
-        ))}
         <Divider />
         <div className="flex ">
           {/**List of mails */}

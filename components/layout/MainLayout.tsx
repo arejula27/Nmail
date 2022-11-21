@@ -10,6 +10,8 @@ import DraftIcon from "../../public/draft.svg";
 import SendIcon from "../../public/send.svg";
 import ContactsIcon from "../../public/contacts.svg";
 import SettingsIcon from "../../public/settings.svg";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 type Props = PropsWithChildren & {
   title?: string;
@@ -18,6 +20,7 @@ interface menuOption {
   name: string;
   icon: any;
   divider?: boolean;
+  route: string;
 }
 
 //TODO: usar context para gestionar la opción escogida
@@ -29,23 +32,28 @@ const menuOptions: menuOption[] = [
   {
     name: "Inbox",
     icon: <InboxIcon width={30} />,
+    route: "/inbox",
   },
   {
     name: "Drafts",
     icon: <DraftIcon width={30} />,
+    route: "/drafts",
   },
   {
     name: "Sent",
     icon: <SendIcon width={30} />,
     divider: true,
+    route: "/sent",
   },
   {
     name: "Contacts",
     icon: <ContactsIcon width={30} />,
+    route: "contacts",
   },
   {
     name: "Settings",
     icon: <SettingsIcon width={30} />,
+    route: "settings",
   },
 ];
 
@@ -60,7 +68,7 @@ export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
       <div className="flex  ">
         {/*sidebar */}
         <aside className=" overflow-scroll ease-in duration-200  opacity-0 px-4 md:opacity-100  w-72 xl:w-96 transition-all fixed left-0 border-r  h-[80vh] border-stroke border-opacity-10">
-          {sideBarContent()}
+          {SideBarContent()}
         </aside>
         {/* content*/}
         <div className="  md:pl-72 xl:pl-96">{children}</div>
@@ -69,7 +77,11 @@ export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
   );
 };
 
-const sideBarContent = () => {
+const SideBarContent = () => {
+  const router = useRouter();
+
+  const path = router.pathname;
+
   return (
     <>
       <div className="w-full   ">
@@ -83,19 +95,21 @@ const sideBarContent = () => {
         {/*  menu */}
         {menuOptions.map((opt) => (
           <div key={opt.name} className={"text-paragraph"}>
-            <button
-              className={
-                selectedOption === opt.name
-                  ? "py-2 rounded-lg  bg-accent text-bold   w-full"
-                  : "py-2 rounded-lg    hover:bg-hover w-full"
-              }
-              onClick={() => {}}
-            >
-              <div className="flex items-center">
-                <div className="mx-2 ">{opt.icon}</div>
-                {opt.name}
-              </div>
-            </button>
+            <Link href={opt.route}>
+              <button
+                className={
+                  path === opt.route
+                    ? "py-2 rounded-lg  bg-accent text-bold   w-full"
+                    : "py-2 rounded-lg    hover:bg-hover w-full"
+                }
+                onClick={() => {}}
+              >
+                <div className="flex items-center">
+                  <div className="mx-2 ">{opt.icon}</div>
+                  {opt.name}
+                </div>
+              </button>
+            </Link>
             {opt.divider ? <Divider /> : null}
           </div>
         ))}

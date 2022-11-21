@@ -7,12 +7,9 @@ interface Props {
 }
 
 export const MailCard: FC<Props> = ({ mail, selected }) => {
-  console.log(selected);
-
   const cardStyle =
     (selected ? "bg-accent " : " hover:bg-hover ") +
     "text-headline flex overflow-hidden   p-4 my-1 rounded-xl    w-full ";
-  console.log(cardStyle);
 
   return (
     <button className={cardStyle}>
