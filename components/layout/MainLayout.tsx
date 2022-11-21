@@ -54,10 +54,10 @@ export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
         <title>{title}</title>
       </Head>
       {/* header*/}
-      <div className="  h-16  mx-5 my-4  ">{headerContent()}</div>
+      <div className="   mx-5 mt-4  ">{headerContent()}</div>
       <div className="flex ">
         {/*sidebar */}
-        <aside className=" ease-in duration-200  opacity-0  md:opacity-100  w-72 xl:w-96 transition-all fixed left-0 -screen ">
+        <aside className=" ease-in duration-200  opacity-0  md:opacity-100  w-72 xl:w-96 transition-all fixed left-0 ">
           {sideBarContent()}
         </aside>
         {/* content*/}
@@ -70,7 +70,7 @@ export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
 const sideBarContent = () => {
   return (
     <>
-      <div className="w -full pt-10 px-4 ">
+      <div className="w -full  px-4 ">
         {/* new message button*/}
         <button
           className="py-3 rounded-lg text-center my-3 bg-card-background text-paragraph hover:opacity-60 w-full"
