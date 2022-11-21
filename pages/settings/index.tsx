@@ -4,7 +4,7 @@ import { MainLayout } from "../../components/layout";
 const SettingsPage = () => {
   return (
     <MainLayout>
-      <div>TODO: SettingsPage</div>;
+      <div>TODO: SettingsPage</div>
     </MainLayout>
   );
 };

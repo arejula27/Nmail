@@ -64,7 +64,7 @@ export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
         <title>{title}</title>
       </Head>
       {/* header*/}
-      <div className="   mx-5  ">{headerContent()}</div>
+      <div className="   w-screen ">{headerContent()}</div>
       <div className="flex  ">
         {/*sidebar */}
         <aside className=" overflow-scroll ease-in duration-200  opacity-0 px-4 md:opacity-100  w-72 xl:w-96 transition-all fixed left-0 border-r  h-[80vh] border-stroke border-opacity-10">
@@ -120,7 +120,7 @@ const SideBarContent = () => {
 
 const headerContent = () => {
   return (
-    <div className="  flex flex-grow items-center justify-between ">
+    <div className="  flex flex-grow items-center justify-between px-3 ">
       <MenuIcon width={40} className="block md:hidden" />
       <div className="hidden md:block">
         {/* title and logo*/}

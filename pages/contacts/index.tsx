@@ -4,7 +4,7 @@ import { MainLayout } from "../../components/layout";
 const ContactsPage = () => {
   return (
     <MainLayout>
-      <div>TODO: ContactsPage</div>;
+      <div>TODO: ContactsPage</div>
     </MainLayout>
   );
 };
