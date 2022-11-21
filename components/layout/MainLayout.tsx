@@ -10,6 +10,7 @@ import DraftIcon from "../../public/draft.svg";
 import SendIcon from "../../public/send.svg";
 import ContactsIcon from "../../public/contacts.svg";
 import SettingsIcon from "../../public/settings.svg";
+import Image from "next/image";
 
 type Props = PropsWithChildren & {
   title?: string;
@@ -22,6 +23,8 @@ interface menuOption {
 
 //TODO: usar context para gestionar la opción escogida
 const selectedOption = "Inbox";
+const imageUrl = "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png";
+const usrName = "arejula27";
 
 const menuOptions: menuOption[] = [
   {
@@ -57,7 +60,7 @@ export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
       <div className="   mx-5 mt-4  ">{headerContent()}</div>
       <div className="flex ">
         {/*sidebar */}
-        <aside className=" ease-in duration-200  opacity-0  md:opacity-100  w-72 xl:w-96 transition-all fixed left-0 ">
+        <aside className=" ease-in duration-200  opacity-0 px-4 md:opacity-100  w-72 xl:w-96 transition-all fixed left-0 border-r h-5/6 border-stroke border-opacity-10">
           {sideBarContent()}
         </aside>
         {/* content*/}
@@ -70,27 +73,27 @@ export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
 const sideBarContent = () => {
   return (
     <>
-      <div className="w -full  px-4 ">
+      <div className="w-full   ">
         {/* new message button*/}
         <button
-          className="py-3 rounded-lg text-center my-3 bg-card-background text-paragraph hover:opacity-60 w-full"
+          className="py-3 rounded-lg text-center my-3 bg-primary  hover:bg-hover w-full"
           onClick={() => {}}
         >
           New Message
         </button>
         {/*  menu */}
         {menuOptions.map((opt) => (
-          <div key={opt.name}>
+          <div key={opt.name} className={"text-paragraph"}>
             <button
               className={
                 selectedOption === opt.name
-                  ? "py-2 rounded-lg  bg-gray-light text-bold text-paragraph hover:opacity-60 w-full"
-                  : "py-2 rounded-lg   text-paragraph hover:opacity-60 w-full"
+                  ? "py-2 rounded-lg  bg-accent text-bold   w-full"
+                  : "py-2 rounded-lg    hover:bg-hover w-full"
               }
               onClick={() => {}}
             >
               <div className="flex items-center">
-                <div className="stroke-paragraph mx-2 ">{opt.icon}</div>
+                <div className="mx-2 ">{opt.icon}</div>
                 {opt.name}
               </div>
             </button>
@@ -115,7 +118,19 @@ const headerContent = () => {
         </div>
       </div>
       {/*Perfil */}
-      <div>Perfil</div>
+      <button
+        onClick={() => {}}
+        className="flex items-center font-bold rounded-xl p-2 hover:bg-hover "
+      >
+        {usrName}
+        <img
+          src={imageUrl}
+          alt={""}
+          width={50}
+          height={50}
+          className={"rounded-full ml-3"}
+        />
+      </button>
     </div>
   );
 };
