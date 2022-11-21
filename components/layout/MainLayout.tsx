@@ -67,7 +67,7 @@ export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
       <div className="   w-screen ">{headerContent()}</div>
       <div className="flex  ">
         {/*sidebar */}
-        <aside className=" overflow-scroll ease-in duration-200  opacity-0 px-4 md:opacity-100  w-72 xl:w-96 transition-all fixed left-0 border-r  h-[80vh] border-stroke border-opacity-10">
+        <aside className=" overflow-scroll  invisible  px-4 md:visible  w-72 xl:w-96 fixed left-0 border-r  h-[80vh] border-stroke border-opacity-10">
           {SideBarContent()}
         </aside>
         {/* content*/}

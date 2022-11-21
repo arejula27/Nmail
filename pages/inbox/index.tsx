@@ -3,6 +3,9 @@ import { MailCard, MailFeed } from "../../components/mail";
 import { Divider } from "../../components/ui";
 import { MailData } from "../../interfaces";
 import { getMailList } from "../../services/mail";
+import { feedKind } from "../../interfaces/mail";
+import { UIContext } from "../../context/ui";
+import { useContext } from "react";
 
 const selectedMail: MailData = {
   id: "1",
@@ -18,30 +21,36 @@ const selectedMail: MailData = {
     "Consectetur voluptate nisi esse minim. Nostrud consectetur ex fugiat culpa cillum. Enim culpa veniam velit deserunt ex excepteur exercitation elit commodo sunt. Ea nostrud ea ex exercitation veniam. Sunt in laborum aute quis in pariatur esse. Officia ut quis officia consectetur duis.",
 };
 
-const selectedFeed = "All";
-
 interface menuOption {
   title: string;
   onClick: Function;
+  kind: feedKind;
 }
 
 const headerMenuOptions: menuOption[] = [
   {
     title: "All",
+    kind: "all",
+
     onClick: () => {},
   },
   {
     title: "Read",
+    kind: "read",
     onClick: () => {},
   },
   {
     title: "Unread",
-    onClick: () => {},
+    kind: "unread",
+    onClick: () => {
+      console.log("sapo");
+    },
   },
 ];
 
 export default function InboxPage() {
   const mailsList = getMailList();
+  const uiContext = useContext(UIContext);
 
   return (
     <MainLayout>
@@ -50,9 +59,10 @@ export default function InboxPage() {
           {/*content header menu */}
           {headerMenuOptions.map((opt, idx) => (
             <button
+              onClick={() => uiContext.selectFeed(opt.kind)}
               key={idx}
               className={
-                (opt.title === selectedFeed ? "bg-accent " : "") +
+                (uiContext.selectedFeed === opt.kind ? "bg-accent " : "") +
                 "px-3 py-1 mx-1 rounded-lg"
               }
             >
