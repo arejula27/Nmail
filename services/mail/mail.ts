@@ -27,7 +27,133 @@ const fakeMailList: MailData[] = [
       },
       content: "",
     },
-    
+    {
+      title: "Hola buenas tardes, que tal estas",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
+    {
+      title: "Hola buenas tardes, que tal estas",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
+    {
+      title:
+        "Sint anim amet labore incididunt qui tempor Sint anim amet labore incididunt qui tempor.",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
+    {
+      title: "Hola buenas tardes, que tal estas",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
+    {
+      title:
+        "Sint anim amet labore incididunt qui tempor Sint anim amet labore incididunt qui tempor.",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
+    {
+      title: "Hola buenas tardes, que tal estas",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
+    {
+      title:
+        "Sint anim amet labore incididunt qui tempor Sint anim amet labore incididunt qui tempor.",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
+    {
+      title:
+        "Sint anim amet labore incididunt qui tempor Sint anim amet labore incididunt qui tempor.",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
+    {
+      title: "Hola buenas tardes, que tal estas",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
+    {
+      title: "Hola buenas tardes, que tal estas",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
+    {
+      title:
+        "Sint anim amet labore incididunt qui tempor Sint anim amet labore incididunt qui tempor.",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
+    {
+      title: "Hola buenas tardes, que tal estas",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
+    {
+      title:
+        "Sint anim amet labore incididunt qui tempor Sint anim amet labore incididunt qui tempor.",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
+    {
+      title: "Hola buenas tardes, que tal estas",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
+    {
+      title:
+        "Sint anim amet labore incididunt qui tempor Sint anim amet labore incididunt qui tempor.",
+      sender: {
+        name: "Sapo",
+        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
+      },
+      content: "",
+    },
   ];
 
   export const getMailList = () =>{

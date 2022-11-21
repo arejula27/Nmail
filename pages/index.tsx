@@ -42,8 +42,8 @@ export default function Home() {
         <Divider />
         <div className="flex ">
           {/**List of mails */}
-          <div className=" w-1/2 overflow-scroll ">
-            <div className="m-3">
+          <div className=" w-1/2 h-[80vh] ">
+            <div className="m-3  h-full overflow-scroll">
               {mailList.map((mail, idx) => (
                 <MailCard
                   mail={mail}
