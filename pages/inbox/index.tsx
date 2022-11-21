@@ -1,5 +1,5 @@
 import { MainLayout } from "../../components/layout/";
-import { MailCard } from "../../components/mail";
+import { MailCard, MailFeed } from "../../components/mail";
 import { Divider } from "../../components/ui";
 import { MailData } from "../../interfaces";
 import { getMailList } from "../../services/mail";
@@ -41,44 +41,29 @@ const headerMenuOptions: menuOption[] = [
 ];
 
 export default function InboxPage() {
-  const mailList = getMailList();
+  const mailsList = getMailList();
 
   return (
     <MainLayout>
-      <div className=" px-3">
-        <div className="flex text-stroke">{}</div>
-        {/*content header menu */}
-        {headerMenuOptions.map((opt, idx) => (
-          <button
-            key={idx}
-            className={
-              (opt.title === selectedFeed ? "bg-accent " : "") +
-              "px-3 py-1 mx-1 rounded-lg"
-            }
-          >
-            {opt.title}
-          </button>
-        ))}
-        <Divider />
-        <div className="flex ">
-          {/**List of mails */}
-          <div className=" w-1/2 h-[80vh] ">
-            <div className="m-3  h-full overflow-scroll">
-              {mailList.map((mail, idx) => (
-                <MailCard
-                  mail={mail}
-                  key={idx}
-                  selected={selectedMail.id === mail.id}
-                />
-              ))}
-            </div>
-          </div>
-          {/**Mail content */}
-          <div className="m-4 w-1/2 overflow-scroll h-[80vh] ">
-            <h1 className="text-3xl font-bold mb-4 ">{selectedMail.title}</h1>
-            <p>{selectedMail.content}</p>
-          </div>
+      <div className="">
+        <div className="flex text-stroke px-3">
+          {/*content header menu */}
+          {headerMenuOptions.map((opt, idx) => (
+            <button
+              key={idx}
+              className={
+                (opt.title === selectedFeed ? "bg-accent " : "") +
+                "px-3 py-1 mx-1 rounded-lg"
+              }
+            >
+              {opt.title}
+            </button>
+          ))}
         </div>
+        <div className="px-3">
+          <Divider />
+        </div>
+        <MailFeed mailsList={mailsList} selectedMail={selectedMail} />
       </div>
     </MainLayout>
   );

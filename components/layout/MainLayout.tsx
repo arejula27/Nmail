@@ -98,9 +98,9 @@ const SideBarContent = () => {
             <Link href={opt.route}>
               <button
                 className={
-                  path === opt.route
-                    ? "py-2 rounded-lg  bg-accent text-bold   w-full"
-                    : "py-2 rounded-lg    hover:bg-hover w-full"
+                  (path === opt.route
+                    ? "  bg-accent text-bold  "
+                    : " hover:bg-hover ") + " my-1  w-full py-2 rounded-lg"
                 }
                 onClick={() => {}}
               >
