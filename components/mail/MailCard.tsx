@@ -7,27 +7,26 @@ interface Props {
 }
 
 export const MailCard: FC<Props> = ({ mail, selected }) => {
-  const imageUrl = "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png";
-  const usrName = "Sapo";
-  const mailTitle = "Hola buenos días quieres ser tu ptopio jefe?";
+  console.log(selected);
+
+  const cardStyle =
+    (selected ? "bg-accent " : " hover:bg-hover ") +
+    "text-headline flex overflow-hidden   p-4 my-1 rounded-xl    w-full ";
+  console.log(cardStyle);
 
   return (
-    <button
-      className={
-        (selected ? "bg-accent " : " bg-background") +
-        "text-headline flex   p-4 m-3 rounded-xl   hover:bg-hover"
-      }
-    >
+    <button className={cardStyle}>
       <img
         src={mail.sender.imageUrl}
         alt={""}
         className={"rounded-full mx-3 w-16 h-16"}
       />
-      <div className="   h-12 w-fit overflow-y-hidden">
-        <h2 className="font-bold font-paragraph text-ellipsis">
+
+      <div className="  h-14  overflow-y-hidden  w-full">
+        <h2 className="font-bold text-ellipsis flex h-8 justify-start ">
           {mail.sender.name}
         </h2>
-        <h2 className="">{mail.title}</h2>
+        <h2 className="flex justify-start ">{mail.title}</h2>
       </div>
     </button>
   );

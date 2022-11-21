@@ -20,7 +20,7 @@ const fakeMailList: MailData[] = [
     },
     {
       title:
-        "Sint anim amet labore incididunt qui tempor Sint anim amet labore incididunt qui tempor.",
+        "Sint anim amet labore incididunt qui tempor Sint anim amet labore incididunt qui tempor. Sint anim amet labore incididunt qui tempor Sint anim amet labore incididunt qui tempor.",
       sender: {
         name: "Sapo",
         imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
