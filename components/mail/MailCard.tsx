@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { MailData } from "../../models";
+import { MailData } from "../../interfaces";
 
 interface Props {
   mail: MailData;

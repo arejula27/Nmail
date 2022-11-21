@@ -1,4 +1,4 @@
-import { MailData } from "../../models";
+import { MailData } from "../../interfaces";
 
 const fakeMailList: MailData[] = [
     {

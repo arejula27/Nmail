@@ -1,7 +1,7 @@
 import { MainLayout } from "../components/layout/";
 import { MailCard } from "../components/mail";
 import { Divider } from "../components/ui";
-import { MailData } from "../models";
+import { MailData } from "../interfaces";
 import { getMailList } from "../services/mail";
 import LeftArrowIcon from "../public/arrow-left.svg";
 import RightArrowIcon from "../public/arrow-right.svg";

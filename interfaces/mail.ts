@@ -6,3 +6,5 @@ export interface MailData {
     content:string,
     id?:string
 }
+
+export type feedKind = "all" | "read" | "unread";
