@@ -19,26 +19,47 @@ const selectedMail: MailData = {
     "Consectetur voluptate nisi esse minim. Nostrud consectetur ex fugiat culpa cillum. Enim culpa veniam velit deserunt ex excepteur exercitation elit commodo sunt. Ea nostrud ea ex exercitation veniam. Sunt in laborum aute quis in pariatur esse. Officia ut quis officia consectetur duis.",
 };
 
+const selectedFeed = "All";
+
+interface menuOption {
+  title: string;
+  onClick: Function;
+}
+
+const headerMenuOptions: menuOption[] = [
+  {
+    title: "All",
+    onClick: () => {},
+  },
+  {
+    title: "Read",
+    onClick: () => {},
+  },
+  {
+    title: "Unread",
+    onClick: () => {},
+  },
+];
+
 export default function Home() {
   const mailList = getMailList();
 
   return (
     <MainLayout>
-      <div className=" ">
-        <div className="flex text-stroke">
+      <div className=" px-3">
+        <div className="flex text-stroke">{}</div>
+        {/*content header menu */}
+        {headerMenuOptions.map((opt, idx) => (
           <button
-            className=" rounded-full  hover:bg-hover m-1"
-            onClick={() => {}}
+            key={idx}
+            className={
+              (opt.title === selectedFeed ? "bg-accent " : "") +
+              "px-3 py-1 mx-1 rounded-lg"
+            }
           >
-            <LeftArrowIcon width={30} height={30} />
+            {opt.title}
           </button>
-          <button
-            className=" rounded-full  hover:bg-hover m-1"
-            onClick={() => {}}
-          >
-            <RightArrowIcon width={30} />
-          </button>
-        </div>
+        ))}
         <Divider />
         <div className="flex ">
           {/**List of mails */}

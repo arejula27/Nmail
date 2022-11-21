@@ -10,7 +10,6 @@ import DraftIcon from "../../public/draft.svg";
 import SendIcon from "../../public/send.svg";
 import ContactsIcon from "../../public/contacts.svg";
 import SettingsIcon from "../../public/settings.svg";
-import Image from "next/image";
 
 type Props = PropsWithChildren & {
   title?: string;
@@ -52,7 +51,7 @@ const menuOptions: menuOption[] = [
 
 export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
   return (
-    <div className="">
+    <div className="fixed">
       <Head>
         <title>{title}</title>
       </Head>
@@ -60,7 +59,7 @@ export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
       <div className="   mx-5  ">{headerContent()}</div>
       <div className="flex  ">
         {/*sidebar */}
-        <aside className=" ease-in duration-200  opacity-0 px-4 md:opacity-100  w-72 xl:w-96 transition-all fixed left-0 border-r h-5/6 border-stroke border-opacity-10">
+        <aside className=" overflow-scroll ease-in duration-200  opacity-0 px-4 md:opacity-100  w-72 xl:w-96 transition-all fixed left-0 border-r  h-[80vh] border-stroke border-opacity-10">
           {sideBarContent()}
         </aside>
         {/* content*/}
