@@ -52,21 +52,21 @@ const menuOptions: menuOption[] = [
 
 export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
   return (
-    <>
+    <div className="">
       <Head>
         <title>{title}</title>
       </Head>
       {/* header*/}
-      <div className="   mx-5 mt-4  ">{headerContent()}</div>
-      <div className="flex ">
+      <div className="   mx-5  ">{headerContent()}</div>
+      <div className="flex  ">
         {/*sidebar */}
         <aside className=" ease-in duration-200  opacity-0 px-4 md:opacity-100  w-72 xl:w-96 transition-all fixed left-0 border-r h-5/6 border-stroke border-opacity-10">
           {sideBarContent()}
         </aside>
         {/* content*/}
-        <div className=" w-full md:pl-72 xl:pl-96">{children}</div>
+        <div className="  md:pl-72 xl:pl-96">{children}</div>
       </div>
-    </>
+    </div>
   );
 };
 

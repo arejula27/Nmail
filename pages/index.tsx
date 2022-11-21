@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <MainLayout>
-      <div className=" m-4">
+      <div className=" ">
         <div className="flex text-stroke">
           <button
             className=" rounded-full  hover:bg-hover m-1"
@@ -42,7 +42,7 @@ export default function Home() {
         <Divider />
         <div className="flex ">
           {/**List of mails */}
-          <div className=" w-1/2 h-screen overflow-scroll ">
+          <div className=" w-1/2 overflow-scroll ">
             <div className="m-3">
               {mailList.map((mail, idx) => (
                 <MailCard
