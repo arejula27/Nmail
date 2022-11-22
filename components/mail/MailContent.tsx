@@ -18,7 +18,7 @@ export const MailContent: FC<Props> = ({ mail }) => {
     <h1>no mail selected</h1>
   ) : (
     <div className=" px-4 pr-10 xl:ml-10 w-full xl:w-1/2  overflow-scroll h-[80vh] ">
-      <div className="flex items-center mb-4 ">
+      <div className="flex items-start mb-4 ">
         <button
           className="stroke-2 xl:collapse hover:bg-hover p-1 rounded-full"
           onClick={() => {
