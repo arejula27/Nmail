@@ -16,6 +16,8 @@ export const MailFeed: FC<Props> = ({ mailsList, selectedMail }) => {
     winHeight: 0,
   });
 
+  const [mounted, setMounted] = useState(false);
+
   const detectSize = () => {
     if (typeof window !== "undefined") {
       detectHW({
@@ -27,6 +29,10 @@ export const MailFeed: FC<Props> = ({ mailsList, selectedMail }) => {
 
   useEffect(() => {
     window.addEventListener("resize", detectSize);
+    if (!mounted) {
+      setMounted(true);
+      detectSize();
+    }
 
     return () => {
       window.removeEventListener("resize", detectSize);
