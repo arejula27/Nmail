@@ -17,14 +17,15 @@ interface Props {
 export const MailFeed: FC<Props> = ({ mailsList, actions = [] }) => {
   const xl = 1280;
 
-  //todo: provoca un efecto raro al iniciarse en un valor arbitrario
-  //pasarlo a un context
+  //arbitrary pixels, they will be changed once the element
+  //is mounted on the DOM
   const [windowDimenion, detectHW] = useState({
     winWidth: 10000,
     winHeight: 100000,
   });
   const mailContext = useContext(MailContext);
-
+  //nexjs use SSR, i cannt get the dimension on the server
+  //this state is used for chcking if i'm on the client
   const [mounted, setMounted] = useState(false);
 
   const detectSize = () => {
@@ -37,6 +38,7 @@ export const MailFeed: FC<Props> = ({ mailsList, actions = [] }) => {
   };
 
   useEffect(() => {
+    //listed al the window redimensions
     window.addEventListener("resize", detectSize);
     if (!mounted) {
       setMounted(true);
@@ -48,6 +50,7 @@ export const MailFeed: FC<Props> = ({ mailsList, actions = [] }) => {
     };
   }, [mounted, windowDimenion, mailContext.selectedMail]);
 
+  //feed for small screens
   const SmallFeed = () => {
     console.log(mailContext.selectedMail);
 
@@ -63,6 +66,7 @@ export const MailFeed: FC<Props> = ({ mailsList, actions = [] }) => {
     );
   };
 
+  //menu with actiions above the feed
   const ActionsMenu = () => {
     console.log(actions.length);
 
