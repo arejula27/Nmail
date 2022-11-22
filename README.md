@@ -1,4 +1,4 @@
-# Nmail
+# Nmail Prueba
 
 A simple and moder client mail-like for [Nostr protocol](https://github.com/nostr-protocol/nostr/blob/master/README.md)
 
