@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
+import { MailContent, MailList } from ".";
 import { MailData } from "../../interfaces";
 import { MailCard } from "./MailCard";
 
@@ -8,29 +9,50 @@ interface Props {
 }
 
 export const MailFeed: FC<Props> = ({ mailsList, selectedMail }) => {
-  return (
+  const xl = 1280;
+  const [showMailContent, setShowMailContent] = useState(true);
+  const [windowDimenion, detectHW] = useState({
+    winWidth: 0,
+    winHeight: 0,
+  });
+
+  const detectSize = () => {
+    if (typeof window !== "undefined") {
+      detectHW({
+        winWidth: window.innerWidth,
+        winHeight: window.innerHeight,
+      });
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", detectSize);
+
+    return () => {
+      window.removeEventListener("resize", detectSize);
+    };
+  }, [windowDimenion]);
+
+  const SmallFeed = () => {
+    return showMailContent ? (
+      <MailContent selectedMail={selectedMail} />
+    ) : (
+      <MailList mailsList={mailsList} selectedMail={selectedMail.id} />
+    );
+  };
+
+  return windowDimenion.winWidth > xl ? (
     <div className=" px-3">
       <div className="flex text-stroke">{}</div>
 
       <div className="flex ">
         {/**List of mails */}
-        <div className=" w-1/2 h-[80vh] ">
-          <div className="m-3  h-full overflow-scroll">
-            {mailsList.map((mail, idx) => (
-              <MailCard
-                mail={mail}
-                key={idx}
-                selected={selectedMail.id === mail.id}
-              />
-            ))}
-          </div>
-        </div>
+        <MailList mailsList={mailsList} selectedMail={selectedMail.id} />
         {/**Mail content */}
-        <div className="m-4 w-1/2 overflow-scroll h-[80vh] ">
-          <h1 className="text-3xl font-bold mb-4 ">{selectedMail.title}</h1>
-          <p>{selectedMail.content}</p>
-        </div>
+        <MailContent selectedMail={selectedMail} />
       </div>
     </div>
+  ) : (
+    SmallFeed()
   );
 };

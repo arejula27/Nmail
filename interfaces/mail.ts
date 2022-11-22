@@ -4,7 +4,7 @@ export interface MailData {
     sender :User,
     title:string,
     content:string,
-    id?:string
+    id:string
 }
 
 export type feedKind = "all" | "read" | "unread";

@@ -1,11 +1,11 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { UIProvider } from "../context/ui";
+import { MailProvider } from "../context/mail";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <UIProvider>
+    <MailProvider>
       <Component {...pageProps} />
-    </UIProvider>
+    </MailProvider>
   );
 }

@@ -4,7 +4,7 @@ import { Divider } from "../../components/ui";
 import { MailData } from "../../interfaces";
 import { getMailList } from "../../services/mail";
 import { feedKind } from "../../interfaces/mail";
-import { UIContext } from "../../context/ui";
+import { MailContext } from "../../context/mail";
 import { useContext } from "react";
 
 const selectedMail: MailData = {
@@ -50,7 +50,7 @@ const headerMenuOptions: menuOption[] = [
 
 export default function InboxPage() {
   const mailsList = getMailList();
-  const uiContext = useContext(UIContext);
+  const mailContext = useContext(MailContext);
 
   return (
     <MainLayout>
@@ -59,10 +59,10 @@ export default function InboxPage() {
           {/*content header menu */}
           {headerMenuOptions.map((opt, idx) => (
             <button
-              onClick={() => uiContext.selectFeed(opt.kind)}
+              onClick={() => mailContext.selectFeed(opt.kind)}
               key={idx}
               className={
-                (uiContext.selectedFeed === opt.kind ? "bg-accent " : "") +
+                (mailContext.selectedFeed === opt.kind ? "bg-accent " : "") +
                 "px-3 py-1 mx-1 rounded-lg"
               }
             >
