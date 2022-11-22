@@ -40,7 +40,7 @@ const headerMenuOptions: menuOption[] = [
   },
 ];
 
-export default function InboxPage() {
+export default function DraftPage() {
   const mailsList = getMailList();
 
   return (
