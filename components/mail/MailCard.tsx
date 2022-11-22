@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
+import { MailContext } from "../../context/mail";
 import { MailData } from "../../interfaces";
 
 interface Props {
@@ -7,12 +8,18 @@ interface Props {
 }
 
 export const MailCard: FC<Props> = ({ mail, selected }) => {
+  const mailContext = useContext(MailContext);
   const cardStyle =
     (selected ? "bg-accent " : " hover:bg-hover ") +
     "text-headline flex overflow-hidden   p-4 my-1 rounded-xl    w-full ";
 
   return (
-    <button className={cardStyle}>
+    <button
+      className={cardStyle}
+      onClick={() => {
+        mailContext.selectMail(mail);
+      }}
+    >
       <img
         src={mail.sender.imageUrl}
         alt={""}

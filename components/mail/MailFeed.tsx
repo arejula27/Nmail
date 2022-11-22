@@ -1,20 +1,20 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import { MailContent, MailList } from ".";
+import { MailContext } from "../../context/mail";
 import { MailData } from "../../interfaces";
-import { MailCard } from "./MailCard";
 
 interface Props {
   mailsList: MailData[];
-  selectedMail: MailData;
 }
 
-export const MailFeed: FC<Props> = ({ mailsList, selectedMail }) => {
+export const MailFeed: FC<Props> = ({ mailsList }) => {
   const xl = 1280;
-  const [showMailContent, setShowMailContent] = useState(true);
+
   const [windowDimenion, detectHW] = useState({
     winWidth: 0,
     winHeight: 0,
   });
+  const mailContext = useContext(MailContext);
 
   const [mounted, setMounted] = useState(false);
 
@@ -37,13 +37,17 @@ export const MailFeed: FC<Props> = ({ mailsList, selectedMail }) => {
     return () => {
       window.removeEventListener("resize", detectSize);
     };
-  }, [windowDimenion]);
+  }, [mounted, windowDimenion, mailContext.selectedMail]);
 
   const SmallFeed = () => {
-    return showMailContent ? (
-      <MailContent selectedMail={selectedMail} />
+    console.log(mailContext.selectedMail);
+
+    console.log(mailContext.selectMail === undefined);
+
+    return mailContext.selectedMail === undefined ? (
+      <MailList mailsList={mailsList} />
     ) : (
-      <MailList mailsList={mailsList} selectedMail={selectedMail.id} />
+      <MailContent mail={mailContext.selectedMail} />
     );
   };
 
@@ -53,9 +57,9 @@ export const MailFeed: FC<Props> = ({ mailsList, selectedMail }) => {
 
       <div className="flex ">
         {/**List of mails */}
-        <MailList mailsList={mailsList} selectedMail={selectedMail.id} />
+        <MailList mailsList={mailsList} />
         {/**Mail content */}
-        <MailContent selectedMail={selectedMail} />
+        <MailContent mail={mailContext.selectedMail} />
       </div>
     </div>
   ) : (

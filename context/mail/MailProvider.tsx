@@ -1,16 +1,18 @@
 import { FC, useReducer } from "react";
 import { PropsWithChildren } from "react";
 import { MailContext, MailReducer } from ".";
-import { feedKind } from "../../interfaces";
+import { feedKind, MailData } from "../../interfaces";
 
 export interface UIState {
   selectedFeed: feedKind;
   mailContentShowed: boolean;
+  selectedMail: MailData | undefined;
 }
 
 const UI_INITIAL_STATE: UIState = {
   selectedFeed: "all",
   mailContentShowed: true,
+  selectedMail: undefined,
 };
 
 export const MailProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -23,6 +25,13 @@ export const MailProvider: FC<PropsWithChildren> = ({ children }) => {
     dispatch({ type: "UI - Show mail content", payload });
   };
 
+  const selectMail = (mail: MailData) => {
+    dispatch({ type: "UI - Select mail", payload: mail });
+  };
+  const unselectMail = () => {
+    dispatch({ type: "UI - Select mail", payload: undefined });
+  };
+
   return (
     <MailContext.Provider
       value={{
@@ -31,6 +40,8 @@ export const MailProvider: FC<PropsWithChildren> = ({ children }) => {
         //Methods
         selectFeed,
         showMailContent,
+        selectMail,
+        unselectMail,
       }}
     >
       {children}
