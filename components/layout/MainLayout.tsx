@@ -12,6 +12,7 @@ import ContactsIcon from "../../public/contacts.svg";
 import SettingsIcon from "../../public/settings.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { NewMessageModal } from "../mail/NewMessageModal";
 
 type Props = PropsWithChildren & {
   title?: string;
@@ -59,20 +60,23 @@ const menuOptions: menuOption[] = [
 
 export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
   return (
-    <div className="fixed">
+    <div className="fixed h-screen bg-background ">
       <Head>
         <title>{title}</title>
       </Head>
       {/* header*/}
-      <div className="   w-screen ">{headerContent()}</div>
-      <div className="flex  ">
-        {/*sidebar */}
-        <aside className=" overflow-scroll  invisible  px-4 md:visible  w-72 xl:w-96 fixed left-0 border-r  h-[80vh] border-stroke border-opacity-10">
-          {SideBarContent()}
-        </aside>
-        {/* content*/}
-        <div className="  md:pl-72 xl:pl-96">{children}</div>
+      <div className="">
+        <div className="   w-screen ">{headerContent()}</div>
+        <div className="flex  ">
+          {/*sidebar */}
+          <aside className=" overflow-scroll  invisible  px-4 md:visible  w-72 xl:w-96 fixed left-0 border-r  h-[80vh] border-stroke border-opacity-10">
+            {SideBarContent()}
+          </aside>
+          {/* content*/}
+          <div className="  md:pl-72 xl:pl-96">{children}</div>
+        </div>
       </div>
+      <NewMessageModal />
     </div>
   );
 };
@@ -87,7 +91,7 @@ const SideBarContent = () => {
       <div className="w-full   ">
         {/* new message button*/}
         <button
-          className="py-3 rounded-lg text-center my-3 bg-primary  hover:bg-hover w-full"
+          className="py-3 rounded-lg text-center my-3  bg-primary  hover:bg-hover w-full"
           onClick={() => {}}
         >
           New Message
