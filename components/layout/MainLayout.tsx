@@ -1,6 +1,12 @@
 import Head from "next/head";
-import React, { FC, PropsWithChildren, useContext } from "react";
-import { Divider } from "../ui";
+import React, {
+  FC,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { Divider, DrawerMenu } from "../ui";
 
 //SVGs
 import MailIcon from "../../public/mail.svg";
@@ -14,6 +20,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { NewMessageModal } from "../mail/NewMessageModal";
 import { UIContext } from "../../context/UI";
+import { MailContext } from "../../context/mail";
 
 type Props = PropsWithChildren & {
   title?: string;
@@ -60,27 +67,73 @@ const menuOptions: menuOption[] = [
 ];
 
 export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
+  const md = 768;
+  //arbitrary pixels, they will be changed once the element
+  //is mounted on the DOM
+  const [windowDimenion, detectHW] = useState({
+    winWidth: 10000,
+    winHeight: 100000,
+  });
+
+  //nexjs use SSR, i cannt get the dimension on the server
+  //this state is used for chcking if i'm on the client
+  const [mounted, setMounted] = useState(false);
+
+  const detectSize = () => {
+    if (typeof window !== "undefined") {
+      detectHW({
+        winWidth: window.innerWidth,
+        winHeight: window.innerHeight,
+      });
+    }
+  };
+
+  useEffect(() => {
+    //listed al the window redimensions
+    window.addEventListener("resize", detectSize);
+    if (!mounted) {
+      setMounted(true);
+      detectSize();
+    }
+
+    return () => {
+      window.removeEventListener("resize", detectSize);
+    };
+  }, [mounted, windowDimenion]);
+
   const uiContext = useContext(UIContext);
 
   return (
-    <div className="fixed h-screen bg-background ">
+    <>
       <Head>
         <title>{title}</title>
       </Head>
-      {/* header*/}
-      <div className="">
-        <div className="   w-screen ">{headerContent()}</div>
-        <div className="flex  ">
-          {/*sidebar */}
-          <aside className=" overflow-scroll  invisible  px-4 md:visible  w-72 xl:w-96 fixed left-0 border-r  h-[80vh] border-stroke border-opacity-10">
-            {SideBarContent()}
-          </aside>
-          {/* content*/}
-          <div className="  md:pl-72 xl:pl-96">{children}</div>
+      <div className="fixed h-screen bg-background ">
+        {uiContext.menuDrawerShowed && windowDimenion.winWidth < md ? (
+          <div className="   z-5">
+            <DrawerMenu>
+              <SideBarContent />
+            </DrawerMenu>
+          </div>
+        ) : null}
+
+        {/* header*/}
+        <div className="">
+          <div className="   w-screen ">
+            <HeaderContent />
+          </div>
+          <div className="flex  ">
+            {/*sidebar */}
+            <aside className=" overflow-scroll  invisible  px-4 md:visible  w-72 xl:w-96 fixed left-0 border-r  h-[80vh] border-stroke border-opacity-10">
+              <SideBarContent />
+            </aside>
+            {/* content*/}
+            <div className="  md:pl-72 xl:pl-96">{children}</div>
+          </div>
         </div>
+        {uiContext.newMessageModalShowed ? <NewMessageModal /> : null}
       </div>
-      {uiContext.newMessageModalShowed ? <NewMessageModal /> : null}
-    </div>
+    </>
   );
 };
 
@@ -127,11 +180,19 @@ const SideBarContent = () => {
   );
 };
 
-const headerContent = () => {
+const HeaderContent = () => {
+  const uiContext = useContext(UIContext);
   return (
-    <div className="  flex flex-grow items-center justify-between px-3 ">
-      <MenuIcon width={40} className="block md:hidden" />
-      <div className="hidden md:block">
+    <div className="  flex flex-grow items-center justify-between px-3 mt-2  ">
+      <button
+        className="block md:hidden hover:bg-hover p-2 rounded-full"
+        onClick={() => {
+          uiContext.showMenuDrawer(true);
+        }}
+      >
+        <MenuIcon width={40} />
+      </button>
+      <div className="hidden md:block ">
         {/* title and logo*/}
         <div className="flex items-center  text-headline">
           <MailIcon width={40} />
