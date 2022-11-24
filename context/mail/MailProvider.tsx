@@ -3,13 +3,13 @@ import { PropsWithChildren } from "react";
 import { MailContext, MailReducer } from ".";
 import { feedKind, MailData } from "../../interfaces";
 
-export interface UIState {
+export interface MailState {
   selectedFeed: feedKind;
   mailContentShowed: boolean;
   selectedMail: MailData | undefined;
 }
 
-const UI_INITIAL_STATE: UIState = {
+const UI_INITIAL_STATE: MailState = {
   selectedFeed: "all",
   mailContentShowed: true,
   selectedMail: undefined,

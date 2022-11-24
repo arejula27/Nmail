@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CrossIcon from "../../public/cross.svg";
 import MinusIcon from "../../public/minus.svg";
 import ExpandIcon from "../../public/expand.svg";
 import { Divider } from "../ui";
+import { UIContext } from "../../context/UI";
 
 interface FormValues {
   subject: string;
@@ -16,8 +17,12 @@ export const NewMessageModal = () => {
     recipients: "",
     content: "",
   });
-
+  const uiContext = useContext(UIContext);
   const [minimized, setMinimized] = useState(false);
+
+  const closeModal = () => {
+    uiContext.showNewMessageModal(false);
+  };
 
   const MinimizedModal = () => {
     return (
@@ -33,7 +38,10 @@ export const NewMessageModal = () => {
             >
               <ExpandIcon height={20} />
             </button>
-            <button className="p-2  hover:bg-hover rounded-full mx-1">
+            <button
+              className="p-2  hover:bg-hover rounded-full mx-1"
+              onClick={closeModal}
+            >
               <CrossIcon height={20} />
             </button>
           </div>
@@ -56,7 +64,10 @@ export const NewMessageModal = () => {
             >
               <MinusIcon height={20} />
             </button>
-            <button className="p-2  hover:bg-hover rounded-full mx-1">
+            <button
+              className="p-2  hover:bg-hover rounded-full mx-1"
+              onClick={closeModal}
+            >
               <CrossIcon height={20} />
             </button>
           </div>

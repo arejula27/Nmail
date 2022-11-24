@@ -1,4 +1,4 @@
-import { UIState } from ".";
+import { MailState } from ".";
 import { feedKind } from "../../interfaces";
 import { MailData } from "../../interfaces/mail";
 
@@ -7,7 +7,10 @@ type UIActionType =
   | { type: "UI - Show mail content"; payload: boolean }
   | { type: "UI - Select mail"; payload?: MailData };
 
-export const MailReducer = (state: UIState, action: UIActionType): UIState => {
+export const MailReducer = (
+  state: MailState,
+  action: UIActionType
+): MailState => {
   switch (action.type) {
     case "UI - Select feed":
       return {

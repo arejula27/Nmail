@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, PropsWithChildren, useContext } from "react";
 import { Divider } from "../ui";
 
 //SVGs
@@ -13,6 +13,7 @@ import SettingsIcon from "../../public/settings.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { NewMessageModal } from "../mail/NewMessageModal";
+import { UIContext } from "../../context/UI";
 
 type Props = PropsWithChildren & {
   title?: string;
@@ -59,6 +60,8 @@ const menuOptions: menuOption[] = [
 ];
 
 export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
+  const uiContext = useContext(UIContext);
+
   return (
     <div className="fixed h-screen bg-background ">
       <Head>
@@ -76,14 +79,14 @@ export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
           <div className="  md:pl-72 xl:pl-96">{children}</div>
         </div>
       </div>
-      <NewMessageModal />
+      {uiContext.newMessageModalShowed ? <NewMessageModal /> : null}
     </div>
   );
 };
 
 const SideBarContent = () => {
   const router = useRouter();
-
+  const uiContext = useContext(UIContext);
   const path = router.pathname;
 
   return (
@@ -92,7 +95,9 @@ const SideBarContent = () => {
         {/* new message button*/}
         <button
           className="py-3 rounded-lg text-center my-3  bg-primary  hover:bg-hover w-full"
-          onClick={() => {}}
+          onClick={() => {
+            uiContext.showNewMessageModal(true);
+          }}
         >
           New Message
         </button>
