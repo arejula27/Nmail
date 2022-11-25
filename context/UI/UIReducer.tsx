@@ -1,6 +1,4 @@
 import { UIState } from ".";
-import { feedKind } from "../../interfaces";
-import { MailData } from "../../interfaces/mail";
 
 type UIActionType =
   | { type: "UI - Show new message modal"; payload: boolean }

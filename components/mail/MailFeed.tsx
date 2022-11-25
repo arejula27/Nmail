@@ -1,7 +1,8 @@
 import React, { FC, useContext, useEffect, useState } from "react";
 import { MailContent, MailList } from ".";
 import { MailContext } from "../../context/mail";
-import { feedKind, MailData } from "../../interfaces";
+import { feedKind, MailData } from "../../src/mails/domain";
+
 import { Divider } from "../ui";
 
 export interface action {

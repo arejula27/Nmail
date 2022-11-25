@@ -1,11 +1,12 @@
 import React, { FC, MouseEventHandler, useContext } from "react";
-import { MailData } from "../../interfaces";
+
 import { Divider } from "../ui";
 
 import ReplyIcon from "../../public/arrow-reply.svg";
 import ForwardIcon from "../../public/arrow-forward.svg";
 import LeftIcon from "../../public/arrow-left.svg";
 import { MailContext } from "../../context/mail";
+import { MailData } from "../../src/mails/domain";
 
 interface Props {
   mail: MailData | undefined;

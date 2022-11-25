@@ -1,11 +1,6 @@
 import { MainLayout } from "../../components/layout/";
-import { action, MailCard, MailFeed } from "../../components/mail";
-import { Divider } from "../../components/ui";
-import { MailData } from "../../interfaces";
+import { action, MailFeed } from "../../components/mail";
 import { getMailList } from "../../services/mail";
-import { feedKind } from "../../interfaces/mail";
-import { MailContext } from "../../context/mail";
-import { useContext } from "react";
 
 const actions: action[] = [
   {
@@ -24,7 +19,6 @@ const actions: action[] = [
 
 export default function InboxPage() {
   const mailsList = getMailList();
-  const mailContext = useContext(MailContext);
 
   return (
     <MainLayout>

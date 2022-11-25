@@ -1,5 +1,4 @@
 import { createContext } from "react";
-import { feedKind, MailData } from "../../interfaces";
 
 interface ContextProps {
   newMessageModalShowed: boolean;

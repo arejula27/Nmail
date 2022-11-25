@@ -1,4 +1,5 @@
-import { MailData } from "../../interfaces";
+import { MailData } from "../../src/mails/domain";
+
 
 const fakeMailList: MailData[] = [
     {
