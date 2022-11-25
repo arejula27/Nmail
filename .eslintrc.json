@@ -1,3 +1,18 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "plugins": [
+    "hexagonal-architecture"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "src/**/*.ts"
+      ],
+      "rules": {
+        "hexagonal-architecture/enforce": [
+          "error"
+        ]
+      }
+    }
+  ]
 }
