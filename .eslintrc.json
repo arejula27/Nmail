@@ -6,7 +6,7 @@
   "overrides": [
     {
       "files": [
-        "context/**/*.ts"
+        "src/context/**/*.ts"
       ],
       "rules": {
         "hexagonal-architecture/enforce": [
