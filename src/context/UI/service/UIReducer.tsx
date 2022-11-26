@@ -1,4 +1,4 @@
-import { UIState } from ".";
+import { UIState } from "./UIProvider";
 
 type UIActionType =
   | { type: "UI - Show new message modal"; payload: boolean }

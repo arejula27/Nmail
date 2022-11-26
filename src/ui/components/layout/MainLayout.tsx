@@ -17,7 +17,7 @@ import ContactsIcon from "../../../assets/contacts.svg";
 import SettingsIcon from "../../../assets/settings.svg";
 
 import { NewMessageModal } from "../mail/NewMessageModal";
-import { UIContext } from "../../../context/UI/service";
+import { UIContext } from "../../../context/UI/service/UIContext";
 
 type Props = PropsWithChildren & {
   title?: string;

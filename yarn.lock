@@ -2241,7 +2241,7 @@
     semver "^7.3.7"
     tsutils "^3.21.0"
 
-"@typescript-eslint/utils@5.44.0", "@typescript-eslint/utils@^5.13.0":
+"@typescript-eslint/utils@5.44.0", "@typescript-eslint/utils@^5.13.0", "@typescript-eslint/utils@^5.36.1":
   version "5.44.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-5.44.0.tgz#d733da4d79d6c30f1a68b531cdda1e0c1f00d52d"
   integrity sha512-fMzA8LLQ189gaBjS0MZszw5HBdZgVwxVFShCO3QN+ws3GlPkcy9YuS3U4wkT6su0w+Byjq3mS3uamy9HE4Yfjw==
@@ -4151,7 +4151,7 @@ eslint-import-resolver-node@^0.3.6:
     debug "^3.2.7"
     resolve "^1.20.0"
 
-eslint-module-utils@^2.7.3:
+eslint-module-utils@^2.7.3, eslint-module-utils@^2.7.4:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/eslint-module-utils/-/eslint-module-utils-2.7.4.tgz#4f3e41116aaf13a20792261e61d3a2e7e0583974"
   integrity sha512-j4GT+rqzCoRKHwURX7pddtIPGySnX9Si/cgMI5ztrcqOPtk5dDEeZ34CQVPphnqkJytlc97Vuk05Um2mJ3gEQA==
@@ -4165,6 +4165,14 @@ eslint-plugin-flowtype@^8.0.3:
   dependencies:
     lodash "^4.17.21"
     string-natural-compare "^3.0.1"
+
+eslint-plugin-hexagonal-architecture@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-hexagonal-architecture/-/eslint-plugin-hexagonal-architecture-1.0.3.tgz#d5644e5ca47060722e625559207f12e918f5f4e1"
+  integrity sha512-Im3JkmK0MAw92puUZVhvXmR14SoS04NjgF5R6+rzM7eKGUPoePWoTaxZ0hILGGaJVfccllF7Z2APlaoErznz5A==
+  dependencies:
+    "@typescript-eslint/utils" "^5.36.1"
+    eslint-module-utils "^2.7.4"
 
 eslint-plugin-import@^2.25.3:
   version "2.26.0"

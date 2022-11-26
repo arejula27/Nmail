@@ -1,6 +1,7 @@
 import { FC, useReducer } from "react";
 import { PropsWithChildren } from "react";
-import { UIContext, UIReducer } from ".";
+import { UIContext } from "./UIContext";
+import { UIReducer } from "./UIReducer";
 
 export interface UIState {
   newMessageModalShowed: boolean;

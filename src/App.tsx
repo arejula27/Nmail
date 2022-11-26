@@ -1,6 +1,6 @@
 import { MailProvider } from "./context/mail";
 import { RelayProvider } from "./context/relays/services/Relay";
-import { UIProvider } from "./context/UI/service";
+import { UIProvider } from "./context/UI/service/UIProvider";
 import InboxPage from "./ui/pages/inbox";
 
 function App() {
