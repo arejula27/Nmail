@@ -1,5 +1,4 @@
-import { MailData } from "../../src/mails/domain";
-
+import { MailData } from "../../context/mail/domain/mail";
 
 const fakeMailList: MailData[] = [
     {

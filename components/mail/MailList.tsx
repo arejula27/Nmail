@@ -1,7 +1,7 @@
 import React, { FC, useContext } from "react";
 import { MailCard } from ".";
 import { MailContext } from "../../context/mail";
-import { MailData } from "../../src/mails/domain";
+import { MailData } from "../../context/mail/domain/mail";
 
 interface Props {
   mailsList: MailData[];

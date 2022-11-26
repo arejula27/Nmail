@@ -3,7 +3,7 @@ import CrossIcon from "../../public/cross.svg";
 import MinusIcon from "../../public/minus.svg";
 import ExpandIcon from "../../public/expand.svg";
 import { Divider } from "../ui";
-import { UIContext } from "../../context/UI";
+import { UIContext } from "../../context/UI/service";
 
 interface FormValues {
   subject: string;

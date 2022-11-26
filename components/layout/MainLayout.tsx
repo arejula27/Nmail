@@ -19,7 +19,7 @@ import SettingsIcon from "../../public/settings.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { NewMessageModal } from "../mail/NewMessageModal";
-import { UIContext } from "../../context/UI";
+import { UIContext } from "../../context/UI/service";
 import { MailContext } from "../../context/mail";
 
 type Props = PropsWithChildren & {

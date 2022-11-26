@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { feedKind, MailData } from "../../src/mails/domain";
+import { feedKind, MailData } from "./domain/mail";
 
 interface ContextProps {
   selectedFeed: feedKind;

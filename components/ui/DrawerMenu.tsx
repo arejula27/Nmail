@@ -1,6 +1,6 @@
 import React, { FC, useContext } from "react";
 import { PropsWithChildren } from "react";
-import { UIContext } from "../../context/UI";
+import { UIContext } from "../../context/UI/service";
 import CrossIcon from "../../public/cross.svg";
 
 export const DrawerMenu: FC<PropsWithChildren> = ({ children }) => {

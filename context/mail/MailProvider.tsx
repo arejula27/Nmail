@@ -1,7 +1,7 @@
 import { FC, useReducer } from "react";
 import { PropsWithChildren } from "react";
 import { MailContext, MailReducer } from ".";
-import { feedKind, MailData } from "../../src/mails/domain";
+import { feedKind, MailData } from "./domain/mail";
 
 export interface MailState {
   selectedFeed: feedKind;

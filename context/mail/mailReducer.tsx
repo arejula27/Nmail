@@ -1,5 +1,5 @@
 import { MailState } from ".";
-import { feedKind, MailData } from "../../src/mails/domain";
+import { feedKind, MailData } from "./domain/mail";
 
 type UIActionType =
   | { type: "UI - Select feed"; payload: feedKind }

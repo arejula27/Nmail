@@ -1,4 +1,5 @@
-import { User } from ".";
+import { User } from "../../users/domain";
+
 
 export interface MailData {
     sender :User,
