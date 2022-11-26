@@ -1,4 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, {
+  Dispatch,
+  FC,
+  MouseEventHandler,
+  SetStateAction,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import CrossIcon from "../../../assets/cross.svg";
 import MinusIcon from "../../../assets/minus.svg";
 import ExpandIcon from "../../../assets/expand.svg";
@@ -12,11 +20,6 @@ interface FormValues {
 }
 
 export const NewMessageModal = () => {
-  const [formValues, setFormValues] = useState({
-    subject: "",
-    recipients: "",
-    content: "",
-  });
   const uiContext = useContext(UIContext);
   const [minimized, setMinimized] = useState(false);
 
@@ -50,6 +53,12 @@ export const NewMessageModal = () => {
     );
   };
   const FullModal = () => {
+    const [formValues, setFormValues] = useState<FormValues>({
+      subject: "",
+      recipients: "",
+      content: "",
+    });
+
     return (
       <div className="absolute h-2/3 w-2/3 xl:w-1/2 xl:h-4/5 border-stroke border-1 shadow-2xl  bg-background rounded-lg z-2 mx-3 bottom-0 right-0 my-2 ">
         {/*header bar */}
@@ -77,7 +86,6 @@ export const NewMessageModal = () => {
             <input
               placeholder="Recipients"
               className="flex-grow  outline-none"
-              value={formValues.recipients}
               onChange={(e) => {
                 setFormValues({ ...formValues, recipients: e.target.value });
               }}
@@ -87,14 +95,13 @@ export const NewMessageModal = () => {
             <input
               placeholder="Subject"
               className="flex-grow  outline-none "
-              value={formValues.subject}
+              //value={formValues.subject}
               onChange={(e) => {
                 setFormValues({ ...formValues, subject: e.target.value });
               }}
             />
             <Divider />
             <textarea
-              value={formValues.content}
               draggable={false}
               className=" h-5/6 outline-none w-full resize-none "
               onChange={(e) => {
@@ -106,7 +113,9 @@ export const NewMessageModal = () => {
         <div className="flex flex-grow justify-end">
           <button
             className="bg-primary rounded-lg py-3 px-5 m-5 hover:bg-hover"
-            onClick={() => {}}
+            onClick={() => {
+              console.log(formValues);
+            }}
           >
             Send message
           </button>
