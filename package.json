@@ -10,7 +10,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "nostr-tools": "arejula27/nostr-tools",
+    "nostr-tools": "^0.24.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
@@ -44,7 +44,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
-    "eslint-plugin-hexagonal-architecture": "^1.0.3",
     "postcss": "^8.4.19",
     "tailwindcss": "^3.2.4"
   }

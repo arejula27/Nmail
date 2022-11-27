@@ -1,18 +1,9 @@
 {
   "extends": "",
   "plugins": [
-    "hexagonal-architecture"
+  
   ],
   "overrides": [
-    {
-      "files": [
-        "src/context/**/*.ts"
-      ],
-      "rules": {
-        "hexagonal-architecture/enforce": [
-          "error"
-        ]
-      }
-    }
+   
   ]
 }
