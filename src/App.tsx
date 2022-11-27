@@ -12,6 +12,7 @@ import InboxPage from "./ui/pages/inbox";
 import DraftPage from "./ui/pages/drafts/index";
 import ContactsPage from "./ui/pages/contacts";
 import SentPage from "./ui/pages/sent/index";
+import { RelayProvider } from "./context/relays/services/Relay";
 
 const routes: RouteObject[] = [
   {
@@ -49,9 +50,11 @@ function App() {
   return (
     <>
       <UIProvider>
-        <MailProvider>
-          <RouterProvider router={router} />
-        </MailProvider>
+        <RelayProvider>
+          <MailProvider>
+            <RouterProvider router={router} />
+          </MailProvider>
+        </RelayProvider>
       </UIProvider>
     </>
   );
