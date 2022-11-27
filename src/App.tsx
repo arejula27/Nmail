@@ -14,7 +14,7 @@ import ContactsPage from "./ui/pages/contacts";
 import SentPage from "./ui/pages/sent/index";
 import { RelayProvider } from "./context/relays/services/Relay";
 import SettingsPage from "./ui/pages/settings/index";
-import { MailProvider } from "./context/mail/MailProvider";
+import { MailProvider } from "./context/mail/services/MailProvider";
 
 const routes: RouteObject[] = [
   {
