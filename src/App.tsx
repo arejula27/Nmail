@@ -6,7 +6,7 @@ import {
   RouterProvider,
   Routes,
 } from "react-router-dom";
-import { MailProvider } from "./context/mail";
+
 import { UIProvider } from "./context/UI/service/UIProvider";
 import InboxPage from "./ui/pages/inbox";
 import DraftPage from "./ui/pages/drafts/index";
@@ -14,6 +14,7 @@ import ContactsPage from "./ui/pages/contacts";
 import SentPage from "./ui/pages/sent/index";
 import { RelayProvider } from "./context/relays/services/Relay";
 import SettingsPage from "./ui/pages/settings/index";
+import { MailProvider } from "./context/mail/MailProvider";
 
 const routes: RouteObject[] = [
   {

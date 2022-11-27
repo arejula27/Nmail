@@ -1,6 +1,6 @@
 import React, { FC, useContext, useEffect, useState } from "react";
 import { MailContent, MailList } from ".";
-import { MailContext } from "../../../context/mail";
+import { MailContext } from "../../../context/mail/services/MailContext";
 import { feedKind, MailData } from "../../../context/mail/domain/mail";
 
 import { Divider } from "../ui";
@@ -90,7 +90,7 @@ export const MailFeed: FC<Props> = ({ mailsList, actions = [] }) => {
   };
 
   return windowDimenion.winWidth > xl ? (
-    <div>
+    <div className="">
       <ActionsMenu />
       <div className=" px-3">
         <div className="flex text-stroke">{}</div>

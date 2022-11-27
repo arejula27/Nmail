@@ -4,7 +4,7 @@ import { Divider } from "../ui";
 import ReplyIcon from "../../../assets/arrow-reply.svg";
 import ForwardIcon from "../../../assets/arrow-forward.svg";
 import LeftIcon from "../../../assets/arrow-left.svg";
-import { MailContext } from "../../../context/mail";
+import { MailContext } from "../../../context/mail/services/MailContext";
 import { MailData } from "../../../context/mail/domain/mail";
 
 interface Props {

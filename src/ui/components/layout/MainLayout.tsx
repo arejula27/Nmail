@@ -123,7 +123,7 @@ export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
               <SideBarContent />
             </aside>
             {/* content*/}
-            <div className="  md:pl-72 xl:pl-96">{children}</div>
+            <div className="  md:pl-72 xl:pl-96 w-full">{children}</div>
           </div>
         </div>
         {uiContext.newMessageModalShowed ? <NewMessageModal /> : null}
