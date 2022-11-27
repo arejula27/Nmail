@@ -1,14 +1,42 @@
+import {
+  createBrowserRouter,
+  Navigate,
+  Route,
+  RouteObject,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
 import { MailProvider } from "./context/mail";
-import { RelayProvider } from "./context/relays/services/Relay";
 import { UIProvider } from "./context/UI/service/UIProvider";
 import InboxPage from "./ui/pages/inbox";
+import DraftPage from "./ui/pages/drafts/index";
 
+const routes: RouteObject[] = [
+  {
+    path: "/",
+    element: <Navigate to="inbox" replace />,
+  },
+  {
+    path: "/inbox",
+    element: <InboxPage />,
+  },
+  {
+    path: "/drafts",
+    element: <DraftPage />,
+  },
+];
+
+const router = createBrowserRouter(
+  routes.map(({ path, element }, i) => {
+    return { path, element };
+  })
+);
 function App() {
   return (
     <>
       <UIProvider>
         <MailProvider>
-          <InboxPage />
+          <RouterProvider router={router} />
         </MailProvider>
       </UIProvider>
     </>
