@@ -18,6 +18,7 @@ import SettingsIcon from "../../../assets/settings.svg";
 
 import { NewMessageModal } from "../mail/NewMessageModal";
 import { UIContext } from "../../../context/UI/service/UIContext";
+import { Link } from "react-router-dom";
 
 type Props = PropsWithChildren & {
   title?: string;
@@ -54,12 +55,12 @@ const menuOptions: menuOption[] = [
   {
     name: "Contacts",
     icon: <img src={ContactsIcon} width={30} alt={"Contacts icon"} />,
-    route: "contacts",
+    route: "/contacts",
   },
   {
     name: "Settings",
     icon: <img src={SettingsIcon} width={30} alt={"Inbox icon"} />,
-    route: "settings",
+    route: "/settings",
   },
 ];
 
@@ -138,7 +139,7 @@ export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
 const SideBarContent = () => {
   //const router = useRouter();
   const uiContext = useContext(UIContext);
-  const path = "/inbox"; //router.pathname;
+  const path = location.pathname;
 
   return (
     <>
@@ -156,19 +157,21 @@ const SideBarContent = () => {
         {menuOptions.map((opt, idx) => {
           return (
             <div key={idx} className={"text-paragraph"}>
-              <button
-                onClick={() => {}}
-                className={
-                  (path === opt.route
-                    ? "  bg-accent text-bold  "
-                    : " hover:bg-hover ") + " my-1  w-full py-2 rounded-lg"
-                }
-              >
-                <div className="flex items-center">
-                  <div className="mx-2 ">{opt.icon}</div>
-                  {opt.name}
-                </div>
-              </button>
+              <Link to={opt.route}>
+                <button
+                  onClick={() => {}}
+                  className={
+                    (path === opt.route
+                      ? "  bg-accent text-bold  "
+                      : " hover:bg-hover ") + " my-1  w-full py-2 rounded-lg"
+                  }
+                >
+                  <div className="flex items-center">
+                    <div className="mx-2 ">{opt.icon}</div>
+                    {opt.name}
+                  </div>
+                </button>
+              </Link>
             </div>
           );
         })}
