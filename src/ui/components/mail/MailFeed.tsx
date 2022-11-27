@@ -21,8 +21,8 @@ export const MailFeed: FC<Props> = ({ mailsList, actions = [] }) => {
   //arbitrary pixels, they will be changed once the element
   //is mounted on the DOM
   const [windowDimenion, detectHW] = useState({
-    winWidth: 10000,
-    winHeight: 100000,
+    winWidth: window.innerWidth,
+    winHeight: window.innerHeight,
   });
   const mailContext = useContext(MailContext);
   //nexjs use SSR, i cannt get the dimension on the server
@@ -89,23 +89,21 @@ export const MailFeed: FC<Props> = ({ mailsList, actions = [] }) => {
     ) : null;
   };
 
-  return mounted ? (
-    windowDimenion.winWidth > xl ? (
-      <div>
-        <ActionsMenu />
-        <div className=" px-3">
-          <div className="flex text-stroke">{}</div>
+  return windowDimenion.winWidth > xl ? (
+    <div>
+      <ActionsMenu />
+      <div className=" px-3">
+        <div className="flex text-stroke">{}</div>
 
-          <div className="flex ">
-            {/**List of mails */}
-            <MailList mailsList={mailsList} />
-            {/**Mail content */}
-            <MailContent mail={mailContext.selectedMail} />
-          </div>
+        <div className="flex ">
+          {/**List of mails */}
+          <MailList mailsList={mailsList} />
+          {/**Mail content */}
+          <MailContent mail={mailContext.selectedMail} />
         </div>
       </div>
-    ) : (
-      SmallFeed()
-    )
-  ) : null;
+    </div>
+  ) : (
+    SmallFeed()
+  );
 };

@@ -69,8 +69,8 @@ export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
   //arbitrary pixels, they will be changed once the element
   //is mounted on the DOM
   const [windowDimenion, detectHW] = useState({
-    winWidth: 10000,
-    winHeight: 100000,
+    winWidth: window.innerWidth,
+    winHeight: window.innerHeight,
   });
 
   //nexjs use SSR, i cannt get the dimension on the server
