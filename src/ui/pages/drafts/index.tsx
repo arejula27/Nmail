@@ -1,9 +1,10 @@
 import { MainLayout } from "../../components/layout/";
 import { MailFeed } from "../../components/mail";
-import { getMailList } from "../../../context/mail/application";
+import { useMailUSeCases } from "../../../context/mail/useCases/mailUseCases";
 
 export default function DraftPage() {
-  const mailsList = getMailList();
+  const useMail = useMailUSeCases();
+  const mailsList = useMail.getMailList();
 
   return (
     <MainLayout>

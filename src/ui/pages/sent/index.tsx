@@ -1,10 +1,10 @@
+import { useMailUSeCases } from "../../../context/mail/useCases/mailUseCases";
 import { MainLayout } from "../../components/layout/";
 import { MailFeed } from "../../components/mail";
 
-import { getMailList } from "../../../context/mail/application";
-
 export default function SentPage() {
-  const mailsList = getMailList();
+  const useMail = useMailUSeCases();
+  const mailsList = useMail.getMailList();
 
   return (
     <MainLayout>
