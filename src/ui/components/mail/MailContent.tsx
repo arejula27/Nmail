@@ -20,12 +20,12 @@ export const MailContent: FC<Props> = ({ mail }) => {
     <div className=" px-4 pr-10 xl:ml-10 w-full xl:w-1/2  overflow-scroll h-[80vh] ">
       <div className="flex items-start mb-4 ">
         <button
-          className="stroke-2 xl:collapse hover:bg-hover p-1 rounded-full"
+          className=" xl:collapse hover:bg-hover p-1 rounded-full"
           onClick={() => {
             mailContext.unselectMail();
           }}
         >
-          <LeftIcon />
+          <img src={LeftIcon} width={30} alt="Back icon" />
         </button>
         <h1 className="text-3xl font-bold mx-3 ">{mail.title}</h1>
       </div>
@@ -42,10 +42,10 @@ export const MailContent: FC<Props> = ({ mail }) => {
           <h2>{mail.date}</h2>
           <div className="mt-2 flex items-center">
             <button className="stroke-1 hover:bg-hover p-1 rounded-full mx-1">
-              <ReplyIcon />
+              <img src={ReplyIcon} width={20} alt="Reply icon" />
             </button>
             <button className="stroke-1 hover:bg-hover p-1 rounded-full mx-1 ">
-              <ForwardIcon />
+              <img src={ForwardIcon} width={20} alt="Fordward icon" />
             </button>
           </div>
         </div>
