@@ -11,7 +11,6 @@ import { Relay, relayService } from "../domain";
 
 const pool = relayPool();
 pool.addRelay("wss://nostr.onsats.org");
-console.log(pool);
 
 //Context
 interface ContextProps {

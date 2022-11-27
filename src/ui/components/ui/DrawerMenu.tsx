@@ -9,12 +9,12 @@ export const DrawerMenu: FC<PropsWithChildren> = ({ children }) => {
   return (
     <div className="w-screen h-screen bg-background p-3">
       <button
-        className="hover:bg-hover p-2 rounded-full"
+        className="hover:bg-hover p-2 rounded-full my-1"
         onClick={() => {
           uiContext.showMenuDrawer(false);
         }}
       >
-        <CrossIcon />
+        <img src={CrossIcon} alt="Cross icon" width={30} />
       </button>
       {children}
     </div>

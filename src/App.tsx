@@ -13,6 +13,7 @@ import DraftPage from "./ui/pages/drafts/index";
 import ContactsPage from "./ui/pages/contacts";
 import SentPage from "./ui/pages/sent/index";
 import { RelayProvider } from "./context/relays/services/Relay";
+import SettingsPage from "./ui/pages/settings/index";
 
 const routes: RouteObject[] = [
   {
@@ -37,7 +38,7 @@ const routes: RouteObject[] = [
   },
   {
     path: "/settings",
-    element: <h1>settings page</h1>,
+    element: <SettingsPage />,
   },
 ];
 

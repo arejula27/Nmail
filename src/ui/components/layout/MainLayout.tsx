@@ -103,10 +103,6 @@ export const MainLayout: FC<Props> = ({ children, title = "Nmail" }) => {
 
   return (
     <>
-      <head>
-        <title>{title}</title>
-      </head>
-
       <div className="fixed h-screen bg-background ">
         {uiContext.menuDrawerShowed && windowDimenion.winWidth < md ? (
           <div className="   z-5">

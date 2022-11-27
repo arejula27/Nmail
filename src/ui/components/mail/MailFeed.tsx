@@ -53,10 +53,6 @@ export const MailFeed: FC<Props> = ({ mailsList, actions = [] }) => {
 
   //feed for small screens
   const SmallFeed = () => {
-    console.log(mailContext.selectedMail);
-
-    console.log(mailContext.selectMail === undefined);
-
     return mailContext.selectedMail === undefined ? (
       <div>
         <ActionsMenu />
@@ -69,8 +65,6 @@ export const MailFeed: FC<Props> = ({ mailsList, actions = [] }) => {
 
   //menu with actiions above the feed
   const ActionsMenu = () => {
-    console.log(actions.length);
-
     return actions.length > 0 ? (
       <div>
         <div className="flex text-stroke px-3">

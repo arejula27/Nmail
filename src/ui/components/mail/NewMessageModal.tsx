@@ -113,9 +113,7 @@ export const NewMessageModal = () => {
         <div className="flex flex-grow justify-end">
           <button
             className="bg-primary rounded-lg py-3 px-5 m-5 hover:bg-hover"
-            onClick={() => {
-              console.log(formValues);
-            }}
+            onClick={() => {}}
           >
             Send message
           </button>
