@@ -10,19 +10,7 @@ const SettingsPage = () => {
       {relays.list.map((relay, idx) => {
         return <div key={idx}>{relay.url}</div>;
       })}
-      <button
-        onClick={() => {
-          relays.addRelay({
-            url: "hola",
-            policy: {
-              read: false,
-              write: false,
-            },
-          });
-        }}
-      >
-        Add Relay
-      </button>
+      <button onClick={() => {}}>Add Relay</button>
     </MainLayout>
   );
 };
