@@ -7,7 +7,7 @@ import {
   Routes,
 } from "react-router-dom";
 
-import { UIProvider } from "./context/UI/service/UIProvider";
+import { UIProvider } from "./core/UI/service/UIProvider";
 import InboxPage from "./ui/pages/inbox";
 import DraftPage from "./ui/pages/drafts/index";
 import ContactsPage from "./ui/pages/contacts";

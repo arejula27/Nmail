@@ -1,4 +1,4 @@
-import { feedKind, MailData } from "../../../context/mail/domain/mail";
+import { feedKind, MailData } from "../../../core/mail/domain/mail";
 import { MailState } from "./MailProvider";
 
 type UIActionType =

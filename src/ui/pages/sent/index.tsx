@@ -1,4 +1,4 @@
-import { useMailUSeCases } from "../../../context/mail/useCases/mailUseCases";
+import { useMailUSeCases } from "../../../core/mail/useCases/mailUseCases";
 import { MainLayout } from "../../components/layout/";
 import { MailFeed } from "../../components/mail";
 

@@ -17,7 +17,7 @@ import ContactsIcon from "../../../assets/contacts.svg";
 import SettingsIcon from "../../../assets/settings.svg";
 
 import { NewMessageModal } from "../mail/NewMessageModal";
-import { UIContext } from "../../../context/UI/service/UIContext";
+import { UIContext } from "../../../core/UI/service/UIContext";
 import { Link } from "react-router-dom";
 
 type Props = PropsWithChildren & {

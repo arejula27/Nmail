@@ -1,6 +1,6 @@
 import { MainLayout } from "../../components/layout/";
 import { action, MailFeed } from "../../components/mail";
-import { useMailUSeCases } from "../../../context/mail/useCases/mailUseCases";
+import { useMailUSeCases } from "../../../core/mail/useCases/mailUseCases";
 
 const actions: action[] = [
   {
