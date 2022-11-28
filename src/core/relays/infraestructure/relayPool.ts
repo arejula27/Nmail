@@ -5,8 +5,6 @@ import {
   relayPool,
   Event as NstEvent,
   getBlankEvent,
-  getEventHash,
-  signEvent,
   PoolPublishCallback,
 } from "nostr-tools";
 import { Relay, Event } from "../domain";
@@ -23,11 +21,12 @@ type NEvent = NstEvent & { signature?: string; id?: string };
 
 export class RelayPoolImpl implements RelayPoolRepository {
   private static _instance: RelayPoolImpl;
-  pool: NPool = relayPool() as NPool;
+  pool: NPool;
 
   private constructor() {
+    this.pool = relayPool() as NPool;
     this.pool.addRelay("wss://nostr.onsats.org");
-    this.pool.addRelay("ws://localhost:2700");
+    // this.pool.addRelay("ws://localhost:2700");
   }
 
   public static get Repostory() {
@@ -45,8 +44,7 @@ export class RelayPoolImpl implements RelayPoolRepository {
   }
   async sendEvent(
     { kind, content, tags }: Event,
-    pubkey: string,
-    privkey: string
+    pubkey: string
   ): Promise<void> {
     var nevent: NEvent = getBlankEvent();
     //Fill event fields
@@ -58,11 +56,9 @@ export class RelayPoolImpl implements RelayPoolRepository {
       pubkey: pubkey,
     };
     //assign created at
-    nevent.created_at = new Date().valueOf();
-    //assign id
-    nevent.id = getEventHash(nevent);
-    //Sign
-    nevent.signature = (await signEvent(nevent, privkey)) as unknown as string;
+    nevent.created_at = Math.floor(Date.now().valueOf() / 1000);
+    console.log(nevent.created_at);
+
     const cb: PoolPublishCallback = (status, relay) => {
       console.log(status + " " + relay);
     };
