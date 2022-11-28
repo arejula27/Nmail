@@ -12,9 +12,9 @@ import InboxPage from "./ui/pages/inbox";
 import DraftPage from "./ui/pages/drafts/index";
 import ContactsPage from "./ui/pages/contacts";
 import SentPage from "./ui/pages/sent/index";
-import { RelayProvider } from "./context/relays/services/Relay";
 import SettingsPage from "./ui/pages/settings/index";
-import { MailProvider } from "./context/mail/services/MailProvider";
+import { MailProvider } from "./ui/hooks/mail/MailProvider";
+import { RelayProvider } from "./ui/hooks/relays/Relay";
 
 const routes: RouteObject[] = [
   {

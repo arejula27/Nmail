@@ -1,12 +1,4 @@
-import React, {
-  Dispatch,
-  FC,
-  MouseEventHandler,
-  SetStateAction,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import { useContext, useState } from "react";
 import CrossIcon from "../../../assets/cross.svg";
 import MinusIcon from "../../../assets/minus.svg";
 import ExpandIcon from "../../../assets/expand.svg";

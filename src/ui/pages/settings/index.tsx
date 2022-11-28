@@ -1,4 +1,4 @@
-import { useRelays } from "../../../context/relays/services/Relay";
+import { useRelays } from "../../hooks/relays/Relay";
 import { MainLayout } from "../../components/layout";
 
 const SettingsPage = () => {

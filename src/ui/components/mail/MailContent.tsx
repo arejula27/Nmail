@@ -4,8 +4,9 @@ import { Divider } from "../ui";
 import ReplyIcon from "../../../assets/arrow-reply.svg";
 import ForwardIcon from "../../../assets/arrow-forward.svg";
 import LeftIcon from "../../../assets/arrow-left.svg";
-import { MailContext } from "../../../context/mail/services/MailContext";
+
 import { MailData } from "../../../context/mail/domain/mail";
+import { MailContext } from "../../hooks/mail/MailContext";
 
 interface Props {
   mail: MailData | undefined;

@@ -7,7 +7,7 @@ import {
   useEffect,
   useReducer,
 } from "react";
-import { Relay, relayService } from "../domain";
+import { Relay, relayService } from "../../../context/relays/domain";
 
 const pool = relayPool();
 pool.addRelay("wss://nostr.onsats.org");
