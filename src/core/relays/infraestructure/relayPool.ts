@@ -64,4 +64,8 @@ export class RelayPoolImpl implements RelayPoolRepository {
     };
     this.pool.publish(nevent, cb);
   }
+
+  setPrivateKey(key: string): void {
+    this.pool.setPrivateKey(key);
+  }
 }
