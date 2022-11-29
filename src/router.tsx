@@ -62,7 +62,6 @@ const routes = publicRoutes.concat(
     };
   })
 );
-console.log(routes);
 
 const router = createBrowserRouter(routes);
 

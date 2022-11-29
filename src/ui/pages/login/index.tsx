@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavigateOptions, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth/AuthContext";
 
@@ -12,8 +12,12 @@ export const LoginPage = () => {
 
     navigate("/inbox", { replace: true });
   };
+  useEffect(() => {
+    auth.handleLogout();
+  }, []);
 
   //TODO restriccions
+
   return (
     <div>
       <form name="login" className=" flex flex-col">

@@ -28,6 +28,8 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   };
 
   const handleLogout = () => {
+    useAth.setPublicKey(null);
+    useAth.setPrivateKey(null);
     setSate({ ...state, publicKey: null, privateKey: null });
   };
 
