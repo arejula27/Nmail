@@ -8,7 +8,7 @@ interface RelayUseCases {
 }
 
 export class RelaysUseCasesImpl implements RelayUseCases {
-  relayRepo: RelayPoolRepository;
+  private relayRepo: RelayPoolRepository;
   private static _instance: RelaysUseCasesImpl;
   constructor() {
     this.relayRepo = RelayPoolImpl.Repostory;

@@ -1,3 +1,6 @@
+import { RelayPoolRepository } from "../../relays/domain";
+import { RelayPoolImpl } from "../../relays/infraestructure/relayPool";
+
 export interface AuthUseCases {
   getPublicKey(): string | null;
   getPrivateKey(): string | null;
@@ -9,8 +12,11 @@ const PRIVATE_KEY = "privKey";
 const PUBLIC_KEY = "pubKey";
 
 export class AuthUseCasesImpl implements AuthUseCases {
+  private relayRepo: RelayPoolRepository;
   static _instance: AuthUseCases;
-  constructor() {}
+  constructor() {
+    this.relayRepo = RelayPoolImpl.Repostory;
+  }
 
   public static get Execute() {
     // Do you need arguments? Make it a regular static method instead.
@@ -22,6 +28,7 @@ export class AuthUseCasesImpl implements AuthUseCases {
   getPrivateKey = (): string | null => localStorage.getItem(PRIVATE_KEY);
 
   setPrivateKey(key: string): void {
+    this.relayRepo.setPrivateKey(key);
     localStorage.setItem(PRIVATE_KEY, key);
   }
   setPublicKey(key: string): void {
