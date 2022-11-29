@@ -19,6 +19,7 @@ import SettingsIcon from "../../../assets/settings.svg";
 import { NewMessageModal } from "../mail/NewMessageModal";
 import { UIContext } from "../../../core/UI/service/UIContext";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../hooks/auth/AuthContext";
 
 type Props = PropsWithChildren & {
   title?: string;
@@ -178,6 +179,31 @@ const SideBarContent = () => {
 
 const HeaderContent = () => {
   const uiContext = useContext(UIContext);
+  const authContext = useContext(AuthContext);
+
+  const PofileButton = () => {
+    return (
+      <button
+        onClick={authContext.handleLogout}
+        className=" font-bold   relative z-0"
+      >
+        <div className="flex items-center justify-center z-10 opacity-0 rounded-xl  hover:bg-primary hover:opacity-100 w-full h-full absolute inset-0  duration-100  ">
+          <p>Sign out</p>
+        </div>
+        <div className="flex items-center  w-full h-full relative hover:opacity-0 z-0">
+          {usrName}
+          <img
+            src={imageUrl}
+            alt={""}
+            width={50}
+            height={50}
+            className={"rounded-full ml-3"}
+          />
+        </div>
+      </button>
+    );
+  };
+
   return (
     <div className="  flex flex-grow items-center justify-between px-3 mt-2  ">
       <button
@@ -197,19 +223,7 @@ const HeaderContent = () => {
         </div>
       </div>
       {/*Perfil */}
-      <button
-        onClick={() => {}}
-        className="flex items-center font-bold rounded-xl p-2 hover:bg-hover "
-      >
-        {usrName}
-        <img
-          src={imageUrl}
-          alt={""}
-          width={50}
-          height={50}
-          className={"rounded-full ml-3"}
-        />
-      </button>
+      <PofileButton />
     </div>
   );
 };
