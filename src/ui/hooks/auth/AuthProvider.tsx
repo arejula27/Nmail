@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FC, PropsWithChildren } from "react";
 import { AuthUseCasesImpl } from "../../../core/auth/useCases/authUseCase";
 import { AuthContext } from "./AuthContext";
@@ -14,22 +14,23 @@ const AUTH_INITIAL_STATE: AuthState = {
 };
 
 export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
+  console.log("render");
   const [state, setSate] = useState<AuthState>(AUTH_INITIAL_STATE);
+  const useCaseAuth = AuthUseCasesImpl.Execute;
 
-  const useAth = AuthUseCasesImpl.Execute;
+  useEffect(() => {
+    useCaseAuth.setPrivateKey(state.privateKey);
+    useCaseAuth.setPublicKey(state.publicKey);
+  }, [state]);
+
   const handleLogin = (publicKey: string, privateKey: string) => {
-    //console.log(publicKey);
-
-    useAth.setPublicKey(publicKey);
-    setSate({ ...state, publicKey: publicKey });
-
-    useAth.setPrivateKey(privateKey);
-    setSate({ ...state, privateKey: privateKey });
+    setSate({ ...state, publicKey: publicKey, privateKey: privateKey });
+    console.log("cont: " + state.publicKey);
   };
 
   const handleLogout = () => {
-    useAth.setPublicKey(null);
-    useAth.setPrivateKey(null);
+    useCaseAuth.setPublicKey(null);
+    useCaseAuth.setPrivateKey(null);
     setSate({ ...state, publicKey: null, privateKey: null });
   };
 

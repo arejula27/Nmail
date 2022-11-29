@@ -26,9 +26,7 @@ class MailUseCasesImpl implements MailUseCases {
     return this._instance || (this._instance = new this());
   }
 
-  publishMail = (mail: MailContentValues) => {
-    console.log(mail);
-  };
+  publishMail = (mail: MailContentValues) => {};
 
   getMailList = (): MailData[] => {
     const fake: MailData = {

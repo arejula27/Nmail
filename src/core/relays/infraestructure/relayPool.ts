@@ -60,10 +60,13 @@ export class RelayPoolImpl implements RelayPoolRepository {
     };
     //assign created at
     nevent.created_at = Math.floor(Date.now().valueOf() / 1000);
-    console.log(nevent.created_at);
 
     const cb: PoolPublishCallback = (status, relay) => {
-      console.log(status + " " + relay);
+      if (status === 1) {
+        console.log(relay + " saved the event");
+      } else if (status === -1) {
+        console.log(relay + " didn't save the event");
+      }
     };
     this.pool.publish(nevent, cb);
   }
