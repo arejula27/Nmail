@@ -1,7 +1,8 @@
-import { Event, RelayPoolRepository } from "../../relays/domain";
-import { RelayPoolImpl } from "../../relays/infraestructure/relayPool";
+import { Event } from "../../relays/domain";
+
 import { MailData } from "../domain/mail";
-import { MailContent } from "../../../ui/components/mail/MailContent";
+import { RelayPoolRepository } from "../../../infraestructure/nostr/relayPool";
+import { MailRepo } from "../domain/ports";
 
 export interface MailContentValues {
   subject: string;
@@ -15,10 +16,10 @@ interface MailUseCases {
 }
 
 class MailUseCasesImpl implements MailUseCases {
-  private relayRepo: RelayPoolRepository;
+  private relayRepo: MailRepo;
   private static _instance: MailUseCasesImpl;
   constructor() {
-    this.relayRepo = RelayPoolImpl.Repostory;
+    this.relayRepo = RelayPoolRepository.Repostory;
   }
 
   public static get Execute() {

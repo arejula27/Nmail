@@ -1,5 +1,5 @@
-import { RelayPoolRepository } from "../../relays/domain";
-import { RelayPoolImpl } from "../../relays/infraestructure/relayPool";
+import { RelayPoolRepository } from "../../../infraestructure/nostr/relayPool";
+import { AuthRepo } from "../domain/ports";
 
 export interface AuthUseCases {
   getPublicKey(): string | null;
@@ -12,10 +12,10 @@ const PRIVATE_KEY = "privKey";
 const PUBLIC_KEY = "pubKey";
 
 export class AuthUseCasesImpl implements AuthUseCases {
-  private relayRepo: RelayPoolRepository;
+  private relayRepo: AuthRepo;
   static _instance: AuthUseCases;
   constructor() {
-    this.relayRepo = RelayPoolImpl.Repostory;
+    this.relayRepo = RelayPoolRepository.Repostory;
   }
 
   public static get Execute() {

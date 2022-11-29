@@ -7,8 +7,7 @@ import {
   getBlankEvent,
   PoolPublishCallback,
 } from "nostr-tools";
-import { Relay, Event } from "../domain";
-import { RelayPoolRepository } from "../domain/ports";
+import { Event, Relay } from "../../core/relays/domain";
 
 interface NRelaysAndPolicy {
   relay: NRelay;
@@ -19,17 +18,14 @@ type NPool = RelayPool & { relays: NRelaysAndPolicy[] };
 
 type NEvent = NstEvent & { signature?: string; id?: string };
 
-export class RelayPoolImpl implements RelayPoolRepository {
-  private static _instance: RelayPoolImpl;
+export class RelayPoolRepository {
+  private static _instance: RelayPoolRepository;
   pool: NPool;
 
   private constructor() {
     this.pool = relayPool() as NPool;
     this.pool.addRelay("wss://nostr.onsats.org");
     this.pool.addRelay("ws://localhost:2700");
-    this.pool.setPrivateKey(
-      "0b3020662e2cd9e5f6b8d728ba1aa2334fd8e05f3fe73a75ede7dbf07300a713"
-    );
   }
 
   public static get Repostory() {

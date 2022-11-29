@@ -1,6 +1,5 @@
-import { Relay, RelayPolicy } from "../domain";
-import { RelayPoolRepository } from "../domain/ports";
-import { RelayPoolImpl } from "../infraestructure/relayPool";
+import { RelayPoolRepository } from "../../../infraestructure/nostr/relayPool";
+import { Relay, RelayPolicy, RelaysRepository } from "../domain";
 
 interface RelayUseCases {
   addRelay(url: string, policy: RelayPolicy | undefined): void;
@@ -8,10 +7,10 @@ interface RelayUseCases {
 }
 
 export class RelaysUseCasesImpl implements RelayUseCases {
-  private relayRepo: RelayPoolRepository;
+  private relayRepo: RelaysRepository;
   private static _instance: RelaysUseCasesImpl;
   constructor() {
-    this.relayRepo = RelayPoolImpl.Repostory;
+    this.relayRepo = RelayPoolRepository.Repostory;
   }
 
   public static get Execute() {

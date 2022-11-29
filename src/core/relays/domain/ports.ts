@@ -1,10 +1,7 @@
-import { RelayPolicy } from "nostr-tools";
 import { Event } from "./event";
 import { Relay } from "./relay";
 
-export interface RelayPoolRepository {
+export interface RelaysRepository {
   addRelay(url: string): void;
   listRelays(): Relay[];
-  sendEvent(event: Event, pubkey: string): void;
-  setPrivateKey(key: string): void;
 }
