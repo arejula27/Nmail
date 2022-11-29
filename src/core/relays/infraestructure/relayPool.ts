@@ -26,7 +26,10 @@ export class RelayPoolImpl implements RelayPoolRepository {
   private constructor() {
     this.pool = relayPool() as NPool;
     this.pool.addRelay("wss://nostr.onsats.org");
-    // this.pool.addRelay("ws://localhost:2700");
+    this.pool.addRelay("ws://localhost:2700");
+    this.pool.setPrivateKey(
+      "0b3020662e2cd9e5f6b8d728ba1aa2334fd8e05f3fe73a75ede7dbf07300a713"
+    );
   }
 
   public static get Repostory() {

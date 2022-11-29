@@ -4,6 +4,7 @@ import MinusIcon from "../../../assets/minus.svg";
 import ExpandIcon from "../../../assets/expand.svg";
 import { Divider } from "../ui";
 import { UIContext } from "../../../core/UI/service/UIContext";
+import { MailUSeCasesImpl } from "../../../core/mail/useCases/mailUseCases";
 
 interface FormValues {
   subject: string;
@@ -50,6 +51,13 @@ export const NewMessageModal = () => {
       recipients: "",
       content: "",
     });
+    const onSubmit = () => {
+      MailUSeCasesImpl.Execute.sendMail({
+        subject: formValues.subject,
+        recipients: formValues.recipients,
+        content: formValues.content,
+      });
+    };
 
     return (
       <div className="absolute h-2/3 w-2/3 xl:w-1/2 xl:h-4/5 border-stroke border-1 shadow-2xl  bg-background rounded-lg z-2 mx-3 bottom-0 right-0 my-2 ">
@@ -105,7 +113,7 @@ export const NewMessageModal = () => {
         <div className="flex flex-grow justify-end">
           <button
             className="bg-primary rounded-lg py-3 px-5 m-5 hover:bg-hover"
-            onClick={() => {}}
+            onClick={onSubmit}
           >
             Send message
           </button>
