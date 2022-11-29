@@ -14,9 +14,9 @@ interface MailUseCases {
   sendMail(mail: MailContentValues): void;
 }
 
-class MailUSeCasesImpl implements MailUseCases {
+class MailUseCasesImpl implements MailUseCases {
   private relayRepo: RelayPoolRepository;
-  private static _instance: MailUSeCasesImpl;
+  private static _instance: MailUseCasesImpl;
   constructor() {
     this.relayRepo = RelayPoolImpl.Repostory;
   }
@@ -25,6 +25,7 @@ class MailUSeCasesImpl implements MailUseCases {
     // Do you need arguments? Make it a regular static method instead.
     return this._instance || (this._instance = new this());
   }
+
   publishMail = (mail: MailContentValues) => {
     console.log(mail);
   };
@@ -60,4 +61,4 @@ class MailUSeCasesImpl implements MailUseCases {
   }
 }
 
-export { MailUSeCasesImpl };
+export { MailUseCasesImpl };

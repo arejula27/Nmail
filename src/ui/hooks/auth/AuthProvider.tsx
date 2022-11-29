@@ -1,32 +1,34 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FC, PropsWithChildren } from "react";
-import { useNavigate } from "react-router-dom";
-import { getPublicKey } from "../../../core/auth/useCases/authUseCase";
+import { AuthUseCasesImpl } from "../../../core/auth/useCases/authUseCase";
 import { AuthContext } from "./AuthContext";
 
 export interface AuthState {
-  privateKey: string | undefined;
-  publickey: string | undefined;
+  privateKey: string | null;
+  publicKey: string | null;
 }
 
 const AUTH_INITIAL_STATE: AuthState = {
-  privateKey: undefined,
-  publickey: undefined,
+  privateKey: AuthUseCasesImpl.Execute.getPrivateKey(),
+  publicKey: AuthUseCasesImpl.Execute.getPublicKey(),
 };
 
 export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, setSate] = useState<AuthState>(AUTH_INITIAL_STATE);
 
-  const handleLogin = async () => {
-    const pubkey = await getPublicKey();
+  const useAth = AuthUseCasesImpl.Execute;
+  const handleLogin = (publicKey: string, privateKey: string) => {
+    //console.log(publicKey);
 
-    setSate({ ...state, publickey: pubkey });
-    const privkey = await getPublicKey();
-    setSate({ ...state, privateKey: privkey });
+    useAth.setPublicKey(publicKey);
+    setSate({ ...state, publicKey: publicKey });
+
+    useAth.setPrivateKey(privateKey);
+    setSate({ ...state, privateKey: privateKey });
   };
 
-  const handleLogout = async () => {
-    setSate({ ...state, publickey: undefined, privateKey: undefined });
+  const handleLogout = () => {
+    setSate({ ...state, publicKey: null, privateKey: null });
   };
 
   return (

@@ -1,9 +1,9 @@
-import { MailUSeCasesImpl } from "../../../core/mail/useCases/mailUseCases";
+import { MailUseCasesImpl } from "../../../core/mail/useCases/mailUseCases";
 import { MainLayout } from "../../components/layout/";
 import { MailFeed } from "../../components/mail";
 
 export default function DraftPage() {
-  const mailsList = MailUSeCasesImpl.Execute.getMailList();
+  const mailsList = MailUseCasesImpl.Execute.getMailList();
 
   return (
     <MainLayout>

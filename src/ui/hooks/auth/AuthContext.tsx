@@ -1,12 +1,12 @@
 import { createContext, useContext } from "react";
 
 interface ContextProps {
-  privateKey: string | undefined;
-  publickey: string | undefined;
+  privateKey: string | null;
+  publicKey: string | null;
 
   //Methods
-  handleLogin(): Promise<void>;
-  handleLogout(): Promise<void>;
+  handleLogin(publicKey: string, privateKey: string): void;
+  handleLogout(): void;
 }
 
 export const AuthContext = createContext({} as ContextProps);

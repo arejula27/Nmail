@@ -4,7 +4,7 @@ import MinusIcon from "../../../assets/minus.svg";
 import ExpandIcon from "../../../assets/expand.svg";
 import { Divider } from "../ui";
 import { UIContext } from "../../../core/UI/service/UIContext";
-import { MailUSeCasesImpl } from "../../../core/mail/useCases/mailUseCases";
+import { MailUseCasesImpl } from "../../../core/mail/useCases/mailUseCases";
 
 interface FormValues {
   subject: string;
@@ -52,7 +52,7 @@ export const NewMessageModal = () => {
       content: "",
     });
     const onSubmit = () => {
-      MailUSeCasesImpl.Execute.sendMail({
+      MailUseCasesImpl.Execute.sendMail({
         subject: formValues.subject,
         recipients: formValues.recipients,
         content: formValues.content,

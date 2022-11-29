@@ -1,4 +1,4 @@
-import { MailUSeCasesImpl } from "../../../core/mail/useCases/mailUseCases";
+import { MailUseCasesImpl } from "../../../core/mail/useCases/mailUseCases";
 import { MainLayout } from "../../components/layout/";
 import { action, MailFeed } from "../../components/mail";
 
@@ -18,7 +18,7 @@ const actions: action[] = [
 ];
 
 export default function InboxPage() {
-  const mailsList = MailUSeCasesImpl.Execute.getMailList();
+  const mailsList = MailUseCasesImpl.Execute.getMailList();
 
   return (
     <MainLayout>

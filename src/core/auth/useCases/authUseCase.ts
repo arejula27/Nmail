@@ -1,9 +1,30 @@
-export const getPublicKey = (): Promise<string | undefined> =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve("2342f2f1d131rf12"), 250);
-  });
+export interface AuthUseCases {
+  getPublicKey(): string | null;
+  getPrivateKey(): string | null;
+  setPrivateKey(key: string): void;
+  setPublicKey(key: string): void;
+}
 
-export const getPrivateKey = (): Promise<string | undefined> =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve("2342f2f1d131rf12"), 250);
-  });
+const PRIVATE_KEY = "privKey";
+const PUBLIC_KEY = "pubKey";
+
+export class AuthUseCasesImpl implements AuthUseCases {
+  static _instance: AuthUseCases;
+  constructor() {}
+
+  public static get Execute() {
+    // Do you need arguments? Make it a regular static method instead.
+    return this._instance || (this._instance = new this());
+  }
+
+  getPublicKey = (): string | null => localStorage.getItem(PUBLIC_KEY);
+
+  getPrivateKey = (): string | null => localStorage.getItem(PRIVATE_KEY);
+
+  setPrivateKey(key: string): void {
+    localStorage.setItem(PRIVATE_KEY, key);
+  }
+  setPublicKey(key: string): void {
+    localStorage.setItem(PUBLIC_KEY, key);
+  }
+}

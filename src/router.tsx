@@ -45,9 +45,9 @@ const protectedRoutes: RouteObject[] = [
 ];
 
 const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
-  const { privateKey, publickey } = useAuth();
+  const { privateKey, publicKey } = useAuth();
 
-  if (!privateKey && !publickey) {
+  if (null === privateKey || null === publicKey) {
     return <Navigate to="/login" replace />;
   }
 
