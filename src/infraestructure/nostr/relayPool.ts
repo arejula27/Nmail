@@ -6,8 +6,9 @@ import {
   Event as NstEvent,
   getBlankEvent,
   PoolPublishCallback,
+  SubscriptionOptions,
 } from "nostr-tools";
-import { Event, Relay } from "../../core/relays/domain";
+import { Event, Relay, Filter } from "../../core/relays/domain";
 
 interface NRelaysAndPolicy {
   relay: NRelay;
@@ -25,7 +26,7 @@ export class RelayPoolRepository {
   private constructor() {
     this.pool = relayPool() as NPool;
     this.pool.addRelay("wss://nostr.onsats.org");
-    this.pool.addRelay("ws://localhost:2700");
+    //this.pool.addRelay("ws://localhost:2700");
   }
 
   public static get Repostory() {
@@ -69,5 +70,49 @@ export class RelayPoolRepository {
 
   setPrivateKey(key: string): void {
     this.pool.setPrivateKey(key);
+  }
+
+  async getEvents(filter: Filter): Promise<Event> {
+    var eventRcv: NEvent = {
+      kind: 0,
+      content: "",
+      tags: [],
+      created_at: 0,
+    };
+
+    var rsl: (value: unknown) => void;
+    const opts: SubscriptionOptions = {
+      cb: function (event: NstEvent, relay: string): void {
+        eventRcv = event;
+        console.log("event receive form " + relay);
+        rsl(0);
+      },
+      filter: {
+        ids: filter.ids as string[],
+        kinds: filter.kinds as number[],
+        authors: filter.authors as string[],
+        since: filter.since as number,
+        until: filter.until as number,
+        "#e": filter["#e"] as string[],
+        "#p": filter["#p"] as string[],
+      },
+      skipVerification: false,
+    };
+
+    const subscription = this.pool.sub(opts);
+    await new Promise((r) => {
+      rsl = r;
+    });
+
+    subscription.unsub();
+
+    const res: Event = {
+      kind: eventRcv.kind,
+      content: eventRcv.content,
+      tags: eventRcv.tags,
+    };
+    //console.log("repo " + res);
+
+    return res;
   }
 }

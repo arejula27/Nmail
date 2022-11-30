@@ -20,6 +20,8 @@ import { NewMessageModal } from "../mail/NewMessageModal";
 import { UIContext } from "../../../core/UI/service/UIContext";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../hooks/auth/AuthContext";
+import { AuthUseCasesImpl } from "../../../core/auth/useCases/authUseCase";
+import { User } from "../../../core/auth/domain";
 
 type Props = PropsWithChildren & {
   title?: string;
@@ -33,8 +35,6 @@ interface menuOption {
 
 //TODO: usar context para gestionar la opción escogida
 const selectedOption = "Inbox";
-const imageUrl = "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png";
-const usrName = "arejula27";
 
 const menuOptions: menuOption[] = [
   {
@@ -178,6 +178,17 @@ const SideBarContent = () => {
 };
 
 const HeaderContent = () => {
+  const [user, setUser] = useState<User>({});
+  useEffect(() => {
+    if (!user.name) {
+      SetProfile();
+    }
+  });
+
+  const SetProfile = async () => {
+    const usr = await AuthUseCasesImpl.Execute.getUSerProfileInfo();
+    setUser(usr);
+  };
   const uiContext = useContext(UIContext);
   const authContext = useContext(AuthContext);
 
@@ -191,9 +202,9 @@ const HeaderContent = () => {
           <p>Sign out</p>
         </div>
         <div className="flex items-center  w-full h-full relative hover:opacity-0 z-0">
-          {usrName}
+          {user.name}
           <img
-            src={imageUrl}
+            src={user.picture}
             alt={""}
             width={50}
             height={50}

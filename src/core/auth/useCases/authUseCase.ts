@@ -1,4 +1,5 @@
 import { RelayPoolRepository } from "../../../infraestructure/nostr/relayPool";
+import { User } from "../domain";
 import { AuthRepo } from "../domain/ports";
 
 export interface AuthUseCases {
@@ -6,6 +7,7 @@ export interface AuthUseCases {
   getPrivateKey(): string | null;
   setPrivateKey(key: string | null): void;
   setPublicKey(key: string | null): void;
+  getUSerProfileInfo(): Promise<User>;
 }
 
 const PRIVATE_KEY = "privKey";
@@ -42,5 +44,20 @@ export class AuthUseCasesImpl implements AuthUseCases {
     } else {
       localStorage.setItem(PUBLIC_KEY, key);
     }
+  }
+
+  async getUSerProfileInfo(): Promise<User> {
+    const event = await this.relayRepo.getEvents({
+      kinds: [0],
+      authors: [
+        "42f92ac20296d05c8612c114fed4f82ba36eea2c9bba53745356b922c279a915",
+      ],
+    });
+
+    const user: User = JSON.parse(event.content);
+
+    console.log(user);
+
+    return user;
   }
 }

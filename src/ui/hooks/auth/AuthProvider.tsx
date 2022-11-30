@@ -14,7 +14,6 @@ const AUTH_INITIAL_STATE: AuthState = {
 };
 
 export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
-  console.log("render");
   const [state, setSate] = useState<AuthState>(AUTH_INITIAL_STATE);
   const useCaseAuth = AuthUseCasesImpl.Execute;
 
@@ -25,7 +24,6 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const handleLogin = (publicKey: string, privateKey: string) => {
     setSate({ ...state, publicKey: publicKey, privateKey: privateKey });
-    console.log("cont: " + state.publicKey);
   };
 
   const handleLogout = () => {
