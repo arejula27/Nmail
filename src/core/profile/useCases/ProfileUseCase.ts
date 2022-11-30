@@ -7,7 +7,7 @@ export interface ProfileUseCases {
   getPrivateKey(): string | null;
   setPrivateKey(key: string | null): void;
   setPublicKey(key: string | null): void;
-  getUSerProfileInfo(): Promise<User>;
+  getUSerProfileInfo(pubkey: string): Promise<User>;
 }
 
 const PRIVATE_KEY = "privKey";
@@ -46,12 +46,10 @@ export class ProfileUseCasesImpl implements ProfileUseCases {
     }
   }
 
-  async getUSerProfileInfo(): Promise<User> {
+  async getUSerProfileInfo(pubkey: string): Promise<User> {
     const event = await this.relayRepo.getEvents({
       kinds: [0],
-      authors: [
-        "42f92ac20296d05c8612c114fed4f82ba36eea2c9bba53745356b922c279a915",
-      ],
+      authors: [pubkey],
     });
 
     const user: User = JSON.parse(event.content);

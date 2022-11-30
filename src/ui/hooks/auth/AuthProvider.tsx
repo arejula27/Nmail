@@ -35,7 +35,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     setSate({ ...state, publicKey: null, privateKey: null });
   };
   const reloadUser = () => {
-    useCaseAuth.getUSerProfileInfo().then((user) => {
+    useCaseAuth.getUSerProfileInfo(state.publicKey!).then((user) => {
       setSate({ ...state, currentUser: user });
     });
   };
