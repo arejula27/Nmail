@@ -2,7 +2,11 @@
 
 A simple and moder client mail-like for [Nostr protocol](https://github.com/nostr-protocol/nostr/blob/master/README.md)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Resources
+- https://tailwindcss.com
+- https://heroicons.com
+- https://reactjs.org/
 
 ## Run it
 
