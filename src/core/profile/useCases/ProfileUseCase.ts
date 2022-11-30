@@ -1,8 +1,8 @@
 import { RelayPoolRepository } from "../../../infraestructure/nostr/relayPool";
 import { User } from "../domain";
-import { AuthRepo } from "../domain/ports";
+import { ProfileRepo } from "../domain/ports";
 
-export interface AuthUseCases {
+export interface ProfileUseCases {
   getPublicKey(): string | null;
   getPrivateKey(): string | null;
   setPrivateKey(key: string | null): void;
@@ -13,9 +13,9 @@ export interface AuthUseCases {
 const PRIVATE_KEY = "privKey";
 const PUBLIC_KEY = "pubKey";
 
-export class AuthUseCasesImpl implements AuthUseCases {
-  private relayRepo: AuthRepo;
-  static _instance: AuthUseCases;
+export class ProfileUseCasesImpl implements ProfileUseCases {
+  private relayRepo: ProfileRepo;
+  static _instance: ProfileUseCases;
   constructor() {
     this.relayRepo = RelayPoolRepository.Repostory;
   }

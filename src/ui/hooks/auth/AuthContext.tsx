@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { User } from "../../../core/auth/domain";
+import { User } from "../../../core/profile/domain";
 
 interface ContextProps {
   privateKey: string | null;

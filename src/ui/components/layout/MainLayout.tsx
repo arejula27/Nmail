@@ -20,8 +20,8 @@ import { NewMessageModal } from "../mail/NewMessageModal";
 import { UIContext } from "../../../core/UI/service/UIContext";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../hooks/auth/AuthContext";
-import { AuthUseCasesImpl } from "../../../core/auth/useCases/authUseCase";
-import { User } from "../../../core/auth/domain";
+import { ProfileUseCasesImpl } from "../../../core/profile/useCases/ProfileUseCase";
+import { User } from "../../../core/profile/domain";
 
 type Props = PropsWithChildren & {
   title?: string;

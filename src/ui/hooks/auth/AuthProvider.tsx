@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FC, PropsWithChildren } from "react";
-import { User } from "../../../core/auth/domain";
-import { AuthUseCasesImpl } from "../../../core/auth/useCases/authUseCase";
+import { User } from "../../../core/profile/domain";
+import { ProfileUseCasesImpl } from "../../../core/profile/useCases/ProfileUseCase";
 import { AuthContext } from "./AuthContext";
 
 export interface AuthState {
@@ -11,14 +11,14 @@ export interface AuthState {
 }
 
 const AUTH_INITIAL_STATE: AuthState = {
-  privateKey: AuthUseCasesImpl.Execute.getPrivateKey(),
-  publicKey: AuthUseCasesImpl.Execute.getPublicKey(),
+  privateKey: ProfileUseCasesImpl.Execute.getPrivateKey(),
+  publicKey: ProfileUseCasesImpl.Execute.getPublicKey(),
   currentUser: { name: undefined, picture: undefined },
 };
 
 export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, setSate] = useState<AuthState>(AUTH_INITIAL_STATE);
-  const useCaseAuth = AuthUseCasesImpl.Execute;
+  const useCaseAuth = ProfileUseCasesImpl.Execute;
 
   useEffect(() => {
     useCaseAuth.setPrivateKey(state.privateKey);
