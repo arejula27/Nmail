@@ -23,7 +23,8 @@ export const ProfileProvider: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     useCaseAuth.setPrivateKey(state.privateKey);
     useCaseAuth.setPublicKey(state.publicKey);
-  }, [state]);
+    reloadUser();
+  }, [state.privateKey]);
 
   const handleLogin = (publicKey: string, privateKey: string) => {
     setSate({ ...state, publicKey: publicKey, privateKey: privateKey });
@@ -39,7 +40,7 @@ export const ProfileProvider: FC<PropsWithChildren> = ({ children }) => {
       setSate({ ...state, currentUser: user });
     });
   };
-  reloadUser();
+  //reloadUser();
   return (
     <ProfileContext.Provider
       value={{ ...state, handleLogin, handleLogout, reloadUser }}
