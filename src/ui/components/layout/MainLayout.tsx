@@ -19,7 +19,7 @@ import SettingsIcon from "../../../assets/settings.svg";
 import { NewMessageModal } from "../mail/NewMessageModal";
 import { UIContext } from "../../../core/UI/service/UIContext";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../hooks/auth/AuthContext";
+import { ProfileContext } from "../../hooks/profile/ProfileContext";
 import { ProfileUseCasesImpl } from "../../../core/profile/useCases/ProfileUseCase";
 import { User } from "../../../core/profile/domain";
 
@@ -178,24 +178,23 @@ const SideBarContent = () => {
 };
 
 const HeaderContent = () => {
-  const useAuth = useContext(AuthContext);
+  const useProfile = useContext(ProfileContext);
 
   const uiContext = useContext(UIContext);
-  const authContext = useContext(AuthContext);
 
   const PofileButton = () => {
     return (
       <button
-        onClick={authContext.handleLogout}
+        onClick={useProfile.handleLogout}
         className=" font-bold   relative z-0"
       >
         <div className="flex items-center justify-center z-10 opacity-0 rounded-xl  hover:bg-primary hover:opacity-100 w-full h-full absolute inset-0  duration-100  ">
           <p>Sign out</p>
         </div>
         <div className="flex items-center  w-full h-full relative hover:opacity-0 z-0">
-          {useAuth.currentUser.name}
+          {useProfile.currentUser.name}
           <img
-            src={useAuth.currentUser.picture}
+            src={useProfile.currentUser.picture}
             alt={""}
             width={50}
             height={50}

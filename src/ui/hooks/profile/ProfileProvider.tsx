@@ -2,22 +2,22 @@ import { useEffect, useState } from "react";
 import { FC, PropsWithChildren } from "react";
 import { User } from "../../../core/profile/domain";
 import { ProfileUseCasesImpl } from "../../../core/profile/useCases/ProfileUseCase";
-import { AuthContext } from "./AuthContext";
+import { ProfileContext } from "./ProfileContext";
 
-export interface AuthState {
+export interface ProfileState {
   privateKey: string | null;
   publicKey: string | null;
   currentUser: User;
 }
 
-const AUTH_INITIAL_STATE: AuthState = {
+const PROFILE_INITIAL_STATE: ProfileState = {
   privateKey: ProfileUseCasesImpl.Execute.getPrivateKey(),
   publicKey: ProfileUseCasesImpl.Execute.getPublicKey(),
   currentUser: { name: undefined, picture: undefined },
 };
 
-export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [state, setSate] = useState<AuthState>(AUTH_INITIAL_STATE);
+export const ProfileProvider: FC<PropsWithChildren> = ({ children }) => {
+  const [state, setSate] = useState<ProfileState>(PROFILE_INITIAL_STATE);
   const useCaseAuth = ProfileUseCasesImpl.Execute;
 
   useEffect(() => {
@@ -41,10 +41,10 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   };
   reloadUser();
   return (
-    <AuthContext.Provider
+    <ProfileContext.Provider
       value={{ ...state, handleLogin, handleLogout, reloadUser }}
     >
       {children}
-    </AuthContext.Provider>
+    </ProfileContext.Provider>
   );
 };

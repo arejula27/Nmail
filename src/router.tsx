@@ -1,13 +1,13 @@
 import { FC, PropsWithChildren } from "react";
 import { createBrowserRouter, Navigate, RouteObject } from "react-router-dom";
-import { useAuth } from "./ui/hooks/auth/AuthContext";
 import ContactsPage from "./ui/pages/contacts";
 import DraftPage from "./ui/pages/drafts";
 import InboxPage from "./ui/pages/inbox";
 import SentPage from "./ui/pages/sent";
 import SettingsPage from "./ui/pages/settings";
 import { LoginPage } from "./ui/pages/login/index";
-import { AuthProvider } from "./ui/hooks/auth/AuthProvider";
+import { ProfileProvider } from "./ui/hooks/profile/ProfileProvider";
+import { useProfile } from "./ui/hooks/profile/ProfileContext";
 
 const publicRoutes: RouteObject[] = [
   {
@@ -45,7 +45,7 @@ const protectedRoutes: RouteObject[] = [
 ];
 
 const ProtectedRoute: FC<PropsWithChildren> = ({ children }) => {
-  const { privateKey, publicKey } = useAuth();
+  const { privateKey, publicKey } = useProfile();
 
   if (null === privateKey || null === publicKey) {
     return <Navigate to="/login" replace />;

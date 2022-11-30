@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { NavigateOptions, useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/auth/AuthContext";
+import { useProfile } from "../../hooks/profile/ProfileContext";
 
 export const LoginPage = () => {
-  const auth = useAuth();
+  const auth = useProfile();
   const navigate = useNavigate();
   const [publicKey, setPublicKey] = useState("");
   const [privateKey, setPrivateKey] = useState("");

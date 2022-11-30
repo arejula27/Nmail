@@ -12,8 +12,8 @@ interface ContextProps {
   reloadUser(): void;
 }
 
-export const AuthContext = createContext({} as ContextProps);
+export const ProfileContext = createContext({} as ContextProps);
 
-export const useAuth = () => {
-  return useContext(AuthContext);
+export const useProfile = () => {
+  return useContext(ProfileContext);
 };

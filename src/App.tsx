@@ -4,19 +4,19 @@ import { UIProvider } from "./core/UI/service/UIProvider";
 import { MailProvider } from "./ui/hooks/mail/MailProvider";
 import { RelayProvider } from "./ui/hooks/relays/Relay";
 import { router } from "./router";
-import { AuthProvider } from "./ui/hooks/auth/AuthProvider";
+import { ProfileProvider } from "./ui/hooks/profile/ProfileProvider";
 
 function App() {
   return (
     <>
       <UIProvider>
-        <AuthProvider>
+        <ProfileProvider>
           <RelayProvider>
             <MailProvider>
               <RouterProvider router={router} />
             </MailProvider>
           </RelayProvider>
-        </AuthProvider>
+        </ProfileProvider>
       </UIProvider>
     </>
   );
