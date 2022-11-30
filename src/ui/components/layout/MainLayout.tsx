@@ -178,17 +178,8 @@ const SideBarContent = () => {
 };
 
 const HeaderContent = () => {
-  const [user, setUser] = useState<User>({});
-  useEffect(() => {
-    if (!user.name) {
-      SetProfile();
-    }
-  });
+  const useAuth = useContext(AuthContext);
 
-  const SetProfile = async () => {
-    const usr = await AuthUseCasesImpl.Execute.getUSerProfileInfo();
-    setUser(usr);
-  };
   const uiContext = useContext(UIContext);
   const authContext = useContext(AuthContext);
 
@@ -202,9 +193,9 @@ const HeaderContent = () => {
           <p>Sign out</p>
         </div>
         <div className="flex items-center  w-full h-full relative hover:opacity-0 z-0">
-          {user.name}
+          {useAuth.currentUser.name}
           <img
-            src={user.picture}
+            src={useAuth.currentUser.picture}
             alt={""}
             width={50}
             height={50}
