@@ -1,3 +1,5 @@
+import * as secp256k1 from "@noble/secp256k1";
+
 import {
   RelayPolicy,
   Relay as NRelay,
@@ -9,6 +11,7 @@ import {
   SubscriptionOptions,
 } from "nostr-tools";
 import { Event, Relay, Filter } from "../../core/relays/domain";
+import { decrypt } from "../nip5";
 
 interface NRelaysAndPolicy {
   relay: NRelay;
@@ -111,8 +114,29 @@ export class RelayPoolRepository {
       content: eventRcv.content,
       tags: eventRcv.tags,
     };
-    //console.log("repo " + res);
 
     return res;
+  }
+
+  async subscribeCypher(filter: Filter, pubkey: string, privkey: string) {
+    const opts: SubscriptionOptions = {
+      cb: function (event: NstEvent, relay: string): void {
+        //TODO
+        const msg: string = decrypt(privkey, pubkey, event.content);
+        console.log(msg);
+      },
+      filter: {
+        ids: filter.ids as string[],
+        kinds: filter.kinds as number[],
+        authors: filter.authors as string[],
+        since: filter.since as number,
+        until: filter.until as number,
+        "#e": filter["#e"] as string[],
+        "#p": filter["#p"] as string[],
+      },
+      skipVerification: false,
+    };
+
+    const subscription = this.pool.sub(opts);
   }
 }
