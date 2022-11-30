@@ -5,7 +5,7 @@ import ReplyIcon from "../../../assets/arrow-reply.svg";
 import ForwardIcon from "../../../assets/arrow-forward.svg";
 import LeftIcon from "../../../assets/arrow-left.svg";
 
-import { MailData } from "../../../core/mail/domain/mail";
+import { MailData } from "../../../core/mail/domain/models";
 import { MailContext } from "../../hooks/mail/MailContext";
 
 interface Props {

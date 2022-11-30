@@ -1,6 +1,6 @@
 import { FC, useReducer } from "react";
 import { PropsWithChildren } from "react";
-import { feedKind, MailData } from "../../../core/mail/domain/mail";
+import { feedKind, MailData } from "../../../core/mail/domain/models";
 import { MailContext } from "./MailContext";
 
 import { MailReducer } from "./mailReducer";

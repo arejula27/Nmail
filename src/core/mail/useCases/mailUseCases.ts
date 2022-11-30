@@ -1,6 +1,6 @@
 import { Event } from "../../relays/domain";
 
-import { MailData } from "../domain/mail";
+import { MailData } from "../domain/models";
 import { RelayPoolRepository } from "../../../infraestructure/nostr/relayPool";
 import { MailRepo } from "../domain/ports";
 
