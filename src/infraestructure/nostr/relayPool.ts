@@ -10,7 +10,13 @@ import {
   PoolPublishCallback,
   SubscriptionOptions,
 } from "nostr-tools";
-import { Event, Relay, Filter } from "../../core/relays/domain";
+import {
+  Event,
+  Relay,
+  Filter,
+  subscriptionCallBack,
+  EventDate,
+} from "../../core/relays/domain";
 import { decrypt } from "../nip5";
 
 interface NRelaysAndPolicy {
@@ -28,8 +34,9 @@ export class RelayPoolRepository {
 
   private constructor() {
     this.pool = relayPool() as NPool;
-    this.pool.addRelay("wss://nostr.onsats.org");
+    //this.pool.addRelay("wss://nostr.onsats.org");
     //this.pool.addRelay("ws://localhost:2700");
+    this.pool.addRelay("wss://nostr-relay.wlvs.space");
   }
 
   public static get Repostory() {
@@ -46,7 +53,7 @@ export class RelayPoolRepository {
     });
   }
   async sendEvent(
-    { kind, content, tags }: Event,
+    { kind, content, tags, created_at }: Event,
     pubkey: string
   ): Promise<void> {
     var nevent: NEvent = getBlankEvent();
@@ -57,9 +64,9 @@ export class RelayPoolRepository {
       content: content,
       tags: tags,
       pubkey: pubkey,
+      created_at: created_at.toNumber(),
     };
     //assign created at
-    nevent.created_at = Math.floor(Date.now().valueOf() / 1000);
 
     const cb: PoolPublishCallback = (status, relay) => {
       if (status === 1) {
@@ -113,17 +120,27 @@ export class RelayPoolRepository {
       kind: eventRcv.kind,
       content: eventRcv.content,
       tags: eventRcv.tags,
+      created_at: EventDate.fromNumber(eventRcv.created_at),
     };
 
     return res;
   }
 
-  async subscribeCypher(filter: Filter, pubkey: string, privkey: string) {
+  subscribe(filter: Filter, cbSub: subscriptionCallBack, privkey?: string) {
     const opts: SubscriptionOptions = {
-      cb: function (event: NstEvent, relay: string): void {
-        //TODO
-        const msg: string = decrypt(privkey, pubkey, event.content);
-        console.log(msg);
+      cb: function (NsEvent: NEvent, relay: string): void {
+        const event: Event = {
+          id: NsEvent.id,
+          kind: NsEvent.kind,
+          content: NsEvent.content,
+          tags: NsEvent.tags,
+          created_at: EventDate.fromNumber(NsEvent.created_at),
+          author: NsEvent.pubkey,
+        };
+        if (privkey) {
+          event.content = decrypt(privkey, NsEvent.pubkey, NsEvent.content);
+        }
+        cbSub(event);
       },
       filter: {
         ids: filter.ids as string[],
@@ -137,6 +154,6 @@ export class RelayPoolRepository {
       skipVerification: false,
     };
 
-    const subscription = this.pool.sub(opts);
+    const sub = this.pool.sub(opts);
   }
 }

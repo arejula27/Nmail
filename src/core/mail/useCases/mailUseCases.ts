@@ -1,6 +1,6 @@
-import { Event } from "../../relays/domain";
+import { Event, EventDate, Filter } from "../../relays/domain";
 
-import { MailData } from "../domain/models";
+import { getMailCallback, MailData } from "../domain/models";
 import { RelayPoolRepository } from "../../../infraestructure/nostr/relayPool";
 import { MailRepo } from "../domain/ports";
 
@@ -11,7 +11,11 @@ export interface MailContentValues {
 }
 
 interface MailUseCases {
-  getMailList(): MailData[];
+  getMailListTo(
+    address: string,
+    mailCb: getMailCallback,
+    privkey?: string
+  ): void;
   sendMail(mail: MailContentValues): void;
 }
 
@@ -29,23 +33,31 @@ class MailUseCasesImpl implements MailUseCases {
 
   publishMail = (mail: MailContentValues) => {};
 
-  getMailList = (): MailData[] => {
-    const fake: MailData = {
-      id: "2",
-      title: "Hola buenas tardes, que tal estas",
-      sender: {
-        name: "Kafka",
-        imageUrl: "https://i.postimg.cc/QCWJKsmW/Dreadful-Rate226.png",
-      },
-      content:
-        "Voluptate voluptate non ex culpa ipsum ex occaecat ea sit veniam et est pariatur. Commodo mollit est enim id reprehenderit elit sunt est elit id do. Tempor culpa cupidatat dolore dolor cupidatat proident adipisicing labore occaecat sit." +
-        "\n" +
-        "Voluptate voluptate non ex culpa ipsum ex occaecat ea sit veniam et est pariatur. Commodo mollit est enim id reprehenderit elit sunt est elit id do. Tempor culpa cupidatat dolore dolor cupidatat proident adipisicing labore occaecat sit." +
-        "Consectetur voluptate nisi esse minim. Nostrud consectetur ex fugiat culpa cillum. Enim culpa veniam velit deserunt ex excepteur exercitation elit commodo sunt. Ea nostrud ea ex exercitation veniam. Sunt in laborum aute quis in pariatur esse. Officia ut quis officia consectetur duis.",
-
-      date: "20/11/2022",
+  getMailListTo = (
+    address: string,
+    mailCb: getMailCallback,
+    privkey?: string
+  ): void => {
+    const list: MailData[] = [];
+    const filter: Filter = {
+      kinds: [4],
+      "#p": [address],
     };
-    return [fake];
+    this.relayRepo.subscribe(
+      filter,
+      (event: Event) => {
+        console.log(event);
+        const mail: MailData = {
+          id: event.id as string,
+          sender: { name: event.author || "", imageUrl: "" },
+          title: event.content,
+          content: "",
+          date: event.created_at.format(),
+        };
+        mailCb(mail);
+      },
+      privkey
+    );
   };
 
   sendMail({ subject, content, recipients }: MailContentValues): void {
@@ -53,6 +65,7 @@ class MailUseCasesImpl implements MailUseCases {
       kind: 1,
       content: subject,
       tags: [],
+      created_at: new EventDate(),
     };
     const pkey =
       "42f92ac20296d05c8612c114fed4f82ba36eea2c9bba53745356b922c279a915";
