@@ -9,6 +9,7 @@ import {
   getBlankEvent,
   PoolPublishCallback,
   SubscriptionOptions,
+  Subscription,
 } from "nostr-tools";
 import {
   Event,
@@ -31,6 +32,7 @@ type NEvent = NstEvent & { signature?: string; id?: string };
 export class RelayPoolRepository {
   private static _instance: RelayPoolRepository;
   pool: NPool;
+  private sub?: Subscription;
 
   private constructor() {
     this.pool = relayPool() as NPool;
@@ -127,33 +129,35 @@ export class RelayPoolRepository {
   }
 
   subscribe(filter: Filter, cbSub: subscriptionCallBack, privkey?: string) {
-    const opts: SubscriptionOptions = {
-      cb: function (NsEvent: NEvent, relay: string): void {
-        const event: Event = {
-          id: NsEvent.id,
-          kind: NsEvent.kind,
-          content: NsEvent.content,
-          tags: NsEvent.tags,
-          created_at: EventDate.fromNumber(NsEvent.created_at),
-          author: NsEvent.pubkey,
-        };
-        if (privkey) {
-          event.content = decrypt(privkey, NsEvent.pubkey, NsEvent.content);
-        }
-        cbSub(event);
-      },
-      filter: {
-        ids: filter.ids as string[],
-        kinds: filter.kinds as number[],
-        authors: filter.authors as string[],
-        since: filter.since as number,
-        until: filter.until as number,
-        "#e": filter["#e"] as string[],
-        "#p": filter["#p"] as string[],
-      },
-      skipVerification: false,
-    };
+    if (!this.sub) {
+      const opts: SubscriptionOptions = {
+        cb: function (NsEvent: NEvent, relay: string): void {
+          const event: Event = {
+            id: NsEvent.id,
+            kind: NsEvent.kind,
+            content: NsEvent.content,
+            tags: NsEvent.tags,
+            created_at: EventDate.fromNumber(NsEvent.created_at),
+            author: NsEvent.pubkey,
+          };
+          if (privkey) {
+            event.content = decrypt(privkey, NsEvent.pubkey, NsEvent.content);
+          }
+          cbSub(event);
+        },
+        filter: {
+          ids: filter.ids as string[],
+          kinds: filter.kinds as number[],
+          authors: filter.authors as string[],
+          since: filter.since as number,
+          until: filter.until as number,
+          "#e": filter["#e"] as string[],
+          "#p": filter["#p"] as string[],
+        },
+        skipVerification: false,
+      };
 
-    const sub = this.pool.sub(opts);
+      this.sub = this.pool.sub(opts);
+    }
   }
 }

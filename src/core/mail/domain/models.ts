@@ -8,6 +8,6 @@ export interface MailData {
   date: string;
 }
 
-export type getMailCallback = (mail: MailData) => void;
+export type getMailCallback = (mails: MailData[]) => void;
 
 export type feedKind = "all" | "read" | "unread";

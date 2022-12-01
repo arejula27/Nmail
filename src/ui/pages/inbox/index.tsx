@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { resolve } from "path";
+import { useEffect, useState } from "react";
 import { MailData } from "../../../core/mail/domain/models";
 import { MailUseCasesImpl } from "../../../core/mail/useCases/mailUseCases";
 import { MainLayout } from "../../components/layout/";
 import { action, MailFeed } from "../../components/mail";
 import { useProfile } from "../../hooks/profile/ProfileContext";
+import { MailList } from "../../components/mail/MailList";
 
 const actions: action[] = [
   {
@@ -22,21 +24,24 @@ const actions: action[] = [
 
 export default function InboxPage() {
   const profile = useProfile();
-  const [mailList, setMailList] = useState<MailData[]>([]);
 
-  MailUseCasesImpl.Execute.getMailListTo(
-    profile.publicKey!,
-    (mail: MailData) => {
-      const newList: MailData[] = mailList.concat([mail]);
-      setMailList(newList);
-    },
-    profile.privateKey!
-  );
+  const [mailListState, setMailList] = useState<MailData[]>([]);
+
+  useEffect(() => {
+    MailUseCasesImpl.Execute.getMailListTo(
+      profile.publicKey!,
+      (mails: MailData[]) => {
+        console.log(mails);
+        setMailList(mails);
+      },
+      profile.privateKey!
+    );
+  });
 
   return (
     <MainLayout>
       <div className="">
-        <MailFeed mailsList={mailList} actions={actions} />
+        <MailFeed mailsList={mailListState} actions={actions} />
       </div>
     </MainLayout>
   );

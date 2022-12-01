@@ -22,8 +22,10 @@ interface MailUseCases {
 class MailUseCasesImpl implements MailUseCases {
   private relayRepo: MailRepo;
   private static _instance: MailUseCasesImpl;
+  private mails: MailData[];
   constructor() {
     this.relayRepo = RelayPoolRepository.Repostory;
+    this.mails = [];
   }
 
   public static get Execute() {
@@ -38,7 +40,6 @@ class MailUseCasesImpl implements MailUseCases {
     mailCb: getMailCallback,
     privkey?: string
   ): void => {
-    const list: MailData[] = [];
     const filter: Filter = {
       kinds: [4],
       "#p": [address],
@@ -46,7 +47,6 @@ class MailUseCasesImpl implements MailUseCases {
     this.relayRepo.subscribe(
       filter,
       (event: Event) => {
-        console.log(event);
         const mail: MailData = {
           id: event.id as string,
           sender: { name: event.author || "", imageUrl: "" },
@@ -54,7 +54,8 @@ class MailUseCasesImpl implements MailUseCases {
           content: "",
           date: event.created_at.format(),
         };
-        mailCb(mail);
+        this.mails.push(mail);
+        mailCb(this.mails);
       },
       privkey
     );

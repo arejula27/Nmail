@@ -54,8 +54,6 @@ export class ProfileUseCasesImpl implements ProfileUseCases {
 
     const user: User = JSON.parse(event.content);
 
-    console.log(user);
-
     return user;
   }
 }
