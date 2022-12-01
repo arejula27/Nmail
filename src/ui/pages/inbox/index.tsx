@@ -25,14 +25,16 @@ const actions: action[] = [
 export default function InboxPage() {
   const profile = useProfile();
 
-  const [mailListState, setMailList] = useState<MailData[]>([]);
+  const [state, setState] = useState<{ mails: MailData[] }>({
+    mails: [],
+  });
 
   useEffect(() => {
     MailUseCasesImpl.Execute.getMailListTo(
       profile.publicKey!,
       (mails: MailData[]) => {
         console.log(mails);
-        setMailList(mails);
+        setState({ mails });
       },
       profile.privateKey!
     );
@@ -41,7 +43,7 @@ export default function InboxPage() {
   return (
     <MainLayout>
       <div className="">
-        <MailFeed mailsList={mailListState} actions={actions} />
+        <MailFeed mailsList={state.mails} actions={actions} />
       </div>
     </MainLayout>
   );
