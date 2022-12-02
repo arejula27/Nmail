@@ -41,8 +41,8 @@ export class EventDate {
     const hour = date.getHours();
     const min = date.getMinutes();
     const day = date.getDate();
-    const month = date.getDate();
-    const year = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
     return `${hour}:${min}  ${day}/${month}/${year}`;
   };
 }
