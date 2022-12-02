@@ -33,7 +33,6 @@ export default function InboxPage() {
     MailUseCasesImpl.Execute.getMailListTo(
       profile.publicKey!,
       (mails: MailData[]) => {
-        console.log(mails);
         setState({ mails });
       },
       profile.privateKey!

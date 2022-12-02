@@ -49,7 +49,7 @@ class MailUseCasesImpl implements MailUseCases {
       (event: Event) => {
         const mail: MailData = {
           id: event.id as string,
-          sender: { name: event.author || "", imageUrl: "" },
+          sender: event.author || "",
           title: event.content,
           content: "",
           date: event.created_at.format(),

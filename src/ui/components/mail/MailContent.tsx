@@ -32,12 +32,9 @@ export const MailContent: FC<Props> = ({ mail }) => {
       </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <img
-            className="rounded-full h-12 mx-3"
-            src={mail.sender.imageUrl}
-          ></img>
+          <img className="rounded-full h-12 mx-3" src={""}></img>
 
-          {mail.sender.name}
+          {""}
         </div>
         <div>
           <h2>{mail.date}</h2>

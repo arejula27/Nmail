@@ -1,4 +1,6 @@
-import React, { FC, useContext } from "react";
+import React, { FC, useContext, useEffect, useMemo, useState } from "react";
+import { User } from "../../../core/contacts/domain";
+import { ContactsUseCasesImpl } from "../../../core/contacts/usecases/ContactsUseCases";
 import { MailData } from "../../../core/mail/domain/models";
 import { MailContext } from "../../hooks/mail/MailContext";
 
@@ -9,6 +11,19 @@ interface Props {
 
 export const MailCard: FC<Props> = ({ mail, selected }) => {
   const mailContext = useContext(MailContext);
+
+  const [author, setAuthor] = useState<User>();
+
+  useEffect(() => {
+    (async () => {
+      const mailAuthor = await ContactsUseCasesImpl.Execute.getUSerProfileInfo(
+        mail?.sender!
+      );
+
+      setAuthor(mailAuthor);
+    })();
+  });
+
   const cardStyle =
     (selected ? "bg-accent " : " hover:bg-hover ") +
     "text-headline flex overflow-hidden   p-4 my-1 rounded-xl    w-full ";
@@ -21,14 +36,14 @@ export const MailCard: FC<Props> = ({ mail, selected }) => {
       }}
     >
       <img
-        src={mail.sender.imageUrl}
+        src={author === undefined ? "" : author.picture}
         alt={""}
         className={"rounded-full mx-3 w-16 h-16"}
       />
 
       <div className="  h-14  overflow-y-hidden  w-full">
         <h2 className="font-bold text-ellipsis flex h-8 justify-start ">
-          {mail.sender.name}
+          {author === undefined ? mail.sender : author.name}
         </h2>
         <h2 className="flex justify-start ">{mail.title}</h2>
       </div>
