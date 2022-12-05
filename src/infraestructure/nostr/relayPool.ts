@@ -65,7 +65,8 @@ export class RelayPoolRepository {
       ...nevent,
       kind: kind,
       content: content,
-      tags: tags,
+      //TODO: delete this conversion when update nostr-tools package
+      tags: tags as unknown as string[],
       pubkey: pubkey,
       created_at: created_at.toNumber(),
     };
@@ -130,7 +131,8 @@ export class RelayPoolRepository {
     const res: Event = {
       kind: eventRcv.kind,
       content: eventRcv.content,
-      tags: eventRcv.tags,
+      //TODO: delete this conversion when update nostr-tools package
+      tags: eventRcv.tags as unknown as string[][],
       created_at: EventDate.fromNumber(eventRcv.created_at),
     };
 
@@ -145,7 +147,8 @@ export class RelayPoolRepository {
             id: NsEvent.id,
             kind: NsEvent.kind,
             content: NsEvent.content,
-            tags: NsEvent.tags,
+            //TODO: delete this conversion when update nostr-tools package
+            tags: NsEvent.tags as unknown as string[][],
             created_at: EventDate.fromNumber(NsEvent.created_at),
             author: NsEvent.pubkey,
           };
