@@ -63,6 +63,8 @@ export const NewMessageModal = () => {
         },
         pubkey!
       );
+
+      closeModal();
     };
 
     return (
