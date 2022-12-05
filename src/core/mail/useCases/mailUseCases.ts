@@ -4,6 +4,10 @@ import { getMailCallback, MailData } from "../domain/models";
 import { RelayPoolRepository } from "../../../infraestructure/nostr/relayPool";
 import { MailRepo } from "../domain/ports";
 import { ContactsUseCasesImpl } from "../../contacts/usecases/ContactsUseCases";
+import {
+  ProfileUseCases,
+  ProfileUseCasesImpl,
+} from "../../profile/useCases/ProfileUseCase";
 
 export interface MailContentValues {
   subject: string;
@@ -11,12 +15,14 @@ export interface MailContentValues {
   content: string;
 }
 
-interface MailUseCases {
-  getMailListTo(
-    address: string,
-    mailCb: getMailCallback,
-    privkey?: string
-  ): void;
+export interface Listener {
+  cb: getMailCallback;
+  delete: () => void;
+}
+
+export interface MailUseCases {
+  // getMailListTo(address: string, privkey?: string): void;
+  getMails(): MailData[];
   sendMail(mail: MailContentValues): void;
 }
 
@@ -24,9 +30,43 @@ class MailUseCasesImpl implements MailUseCases {
   private relayRepo: MailRepo;
   private static _instance: MailUseCasesImpl;
   private mails: MailData[];
+  private listeners: Record<string, Listener>;
+
   constructor() {
     this.relayRepo = RelayPoolRepository.Repostory;
     this.mails = [];
+    this.listeners = {};
+    const myPubAddr: string =
+      ProfileUseCasesImpl.Execute.getPublicKey() as string;
+    const myPrivAddr: string =
+      ProfileUseCasesImpl.Execute.getPrivateKey() as string;
+    this.getMailListTo(myPubAddr, myPrivAddr);
+  }
+  getMails(): MailData[] {
+    const mailList = [...this.mails];
+
+    mailList.sort((a: MailData, b: MailData) => {
+      return b.created_at - a.created_at;
+    });
+
+    return mailList;
+  }
+
+  addListener(mailCB: getMailCallback): Listener {
+    const id = Math.random().toString().slice(2);
+    const deleteListener = () => delete this.listeners[id];
+    this.listeners[id] = {
+      cb: mailCB,
+      delete: deleteListener,
+    };
+
+    return this.listeners[id];
+  }
+
+  private notifyListeners() {
+    for (const id in this.listeners) {
+      this.listeners[id].cb(this.getMails());
+    }
   }
 
   public static get Execute() {
@@ -36,11 +76,7 @@ class MailUseCasesImpl implements MailUseCases {
 
   publishMail = (mail: MailContentValues) => {};
 
-  getMailListTo = (
-    address: string,
-    mailCb: getMailCallback,
-    privkey?: string
-  ): void => {
+  private getMailListTo = (address: string, privkey?: string): void => {
     const filter: Filter = {
       kinds: [4],
       "#p": [address],
@@ -59,9 +95,10 @@ class MailUseCasesImpl implements MailUseCases {
           title: event.content,
           content: "",
           date: event.created_at.format(),
+          created_at: event.created_at.toNumber(),
         };
         this.mails.push(mail);
-        mailCb(this.mails);
+        this.notifyListeners();
       },
       privkey
     );

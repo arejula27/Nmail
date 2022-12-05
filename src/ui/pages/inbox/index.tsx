@@ -23,20 +23,19 @@ const actions: action[] = [
 ];
 
 export default function InboxPage() {
-  const profile = useProfile();
-
   const [state, setState] = useState<{ mails: MailData[] }>({
     mails: [],
   });
 
   useEffect(() => {
-    MailUseCasesImpl.Execute.getMailListTo(
-      profile.publicKey!,
-      (mails: MailData[]) => {
-        setState({ mails });
-      },
-      profile.privateKey!
-    );
+    setState({ mails: MailUseCasesImpl.Execute.getMails() });
+    const sub = MailUseCasesImpl.Execute.addListener((mails: MailData[]) => {
+      setState({ mails });
+    });
+
+    return () => {
+      sub.delete();
+    };
   });
 
   return (

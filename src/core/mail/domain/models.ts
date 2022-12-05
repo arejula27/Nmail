@@ -6,6 +6,7 @@ export interface MailData {
   content: string;
   id: string;
   date: string;
+  created_at: number;
 }
 
 export type getMailCallback = (mails: MailData[]) => void;
