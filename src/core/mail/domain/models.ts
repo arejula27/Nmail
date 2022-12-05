@@ -1,7 +1,7 @@
 import { User } from "../../contacts/domain";
 
 export interface MailData {
-  sender: string;
+  author?: User;
   title: string;
   content: string;
   id: string;

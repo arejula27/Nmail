@@ -3,6 +3,7 @@ import { Event, EventDate, Filter } from "../../relays/domain";
 import { getMailCallback, MailData } from "../domain/models";
 import { RelayPoolRepository } from "../../../infraestructure/nostr/relayPool";
 import { MailRepo } from "../domain/ports";
+import { ContactsUseCasesImpl } from "../../contacts/usecases/ContactsUseCases";
 
 export interface MailContentValues {
   subject: string;
@@ -46,10 +47,15 @@ class MailUseCasesImpl implements MailUseCases {
     };
     this.relayRepo.subscribe(
       filter,
-      (event: Event) => {
+      async (event: Event) => {
         const mail: MailData = {
           id: event.id as string,
-          sender: event.author || "",
+          author:
+            event.author === undefined
+              ? undefined
+              : await ContactsUseCasesImpl.Execute.getUSerProfileInfo(
+                  event.author
+                ),
           title: event.content,
           content: "",
           date: event.created_at.format(),
