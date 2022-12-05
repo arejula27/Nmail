@@ -25,8 +25,8 @@ export const ProfileProvider: FC<PropsWithChildren> = ({ children }) => {
   }, [state.privateKey]);
 
   const handleLogin = (publicKey: string, privateKey: string) => {
-    useCaseAuth.setPrivateKey(state.privateKey);
-    useCaseAuth.setPublicKey(state.publicKey);
+    useCaseAuth.setPrivateKey(privateKey);
+    useCaseAuth.setPublicKey(publicKey);
     setSate({ ...state, publicKey: publicKey, privateKey: privateKey });
   };
 
