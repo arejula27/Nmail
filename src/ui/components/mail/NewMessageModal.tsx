@@ -5,6 +5,7 @@ import ExpandIcon from "../../../assets/expand.svg";
 import { Divider } from "../ui";
 import { UIContext } from "../../../core/UI/service/UIContext";
 import { MailUseCasesImpl } from "../../../core/mail/useCases/mailUseCases";
+import { ProfileUseCasesImpl } from "../../../core/profile/useCases/ProfileUseCase";
 
 interface FormValues {
   subject: string;
@@ -52,11 +53,16 @@ export const NewMessageModal = () => {
       content: "",
     });
     const onSubmit = () => {
-      MailUseCasesImpl.Execute.sendMail({
-        subject: formValues.subject,
-        recipients: formValues.recipients,
-        content: formValues.content,
-      });
+      const pubkey = ProfileUseCasesImpl.Execute.getPublicKey();
+
+      MailUseCasesImpl.Execute.sendMail(
+        {
+          subject: formValues.subject,
+          recipients: formValues.recipients,
+          content: formValues.content,
+        },
+        pubkey!
+      );
     };
 
     return (

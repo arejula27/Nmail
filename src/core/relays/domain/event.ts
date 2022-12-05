@@ -2,7 +2,7 @@ type Event = {
   id?: string;
   kind: number;
   content: string;
-  tags: string[];
+  tags: string[][];
   created_at: EventDate;
   author?: string;
 };

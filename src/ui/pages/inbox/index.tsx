@@ -1,11 +1,8 @@
-import { resolve } from "path";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { MailData } from "../../../core/mail/domain/models";
 import { MailUseCasesImpl } from "../../../core/mail/useCases/mailUseCases";
 import { MainLayout } from "../../components/layout/";
 import { action, MailFeed } from "../../components/mail";
-import { useProfile } from "../../hooks/profile/ProfileContext";
-import { MailList } from "../../components/mail/MailList";
 
 const actions: action[] = [
   {
@@ -36,7 +33,10 @@ export default function InboxPage() {
     return () => {
       sub.delete();
     };
-  });
+  }, []);
+
+  useMemo(() => {}, [state]);
+  //
 
   return (
     <MainLayout>

@@ -23,7 +23,7 @@ export interface Listener {
 export interface MailUseCases {
   // getMailListTo(address: string, privkey?: string): void;
   getMails(): MailData[];
-  sendMail(mail: MailContentValues): void;
+  sendMail(mail: MailContentValues, pubkey: string): void;
 }
 
 class MailUseCasesImpl implements MailUseCases {
@@ -31,20 +31,21 @@ class MailUseCasesImpl implements MailUseCases {
   private static _instance: MailUseCasesImpl;
   private mails: MailData[];
   private listeners: Record<string, Listener>;
+  private profileUseCase: ProfileUseCases;
 
   constructor() {
     this.relayRepo = RelayPoolRepository.Repostory;
     this.mails = [];
     this.listeners = {};
-    const myPubAddr: string =
-      ProfileUseCasesImpl.Execute.getPublicKey() as string;
-    const myPrivAddr: string =
-      ProfileUseCasesImpl.Execute.getPrivateKey() as string;
+    this.profileUseCase = ProfileUseCasesImpl.Execute;
+    const myPubAddr: string = this.profileUseCase.getPublicKey() as string;
+    const myPrivAddr: string = this.profileUseCase.getPrivateKey() as string;
     this.getMailListTo(myPubAddr, myPrivAddr);
   }
   getMails(): MailData[] {
     const mailList = [...this.mails];
 
+    //sort mails by date (the most new first)
     mailList.sort((a: MailData, b: MailData) => {
       return b.created_at - a.created_at;
     });
@@ -74,8 +75,6 @@ class MailUseCasesImpl implements MailUseCases {
     return this._instance || (this._instance = new this());
   }
 
-  publishMail = (mail: MailContentValues) => {};
-
   private getMailListTo = (address: string, privkey?: string): void => {
     const filter: Filter = {
       kinds: [4],
@@ -104,16 +103,19 @@ class MailUseCasesImpl implements MailUseCases {
     );
   };
 
-  sendMail({ subject, content, recipients }: MailContentValues): void {
+  sendMail(
+    { subject, content, recipients }: MailContentValues,
+    pubkey: string
+  ): void {
+    const privkey = this.profileUseCase.getPrivateKey() as string;
     const event: Event = {
-      kind: 1,
+      kind: 4,
       content: subject,
-      tags: [],
+      tags: [["p", recipients]],
       created_at: new EventDate(),
     };
-    const pkey =
-      "42f92ac20296d05c8612c114fed4f82ba36eea2c9bba53745356b922c279a915";
-    this.relayRepo.sendEvent(event, pkey);
+
+    this.relayRepo.sendEvent(event, pubkey, privkey);
   }
 }
 

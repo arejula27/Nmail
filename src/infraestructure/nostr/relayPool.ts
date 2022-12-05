@@ -18,7 +18,7 @@ import {
   subscriptionCallBack,
   EventDate,
 } from "../../core/relays/domain";
-import { decrypt } from "../nip5";
+import { decrypt, encrypt } from "../nip5";
 
 interface NRelaysAndPolicy {
   relay: NRelay;
@@ -56,7 +56,8 @@ export class RelayPoolRepository {
   }
   async sendEvent(
     { kind, content, tags, created_at }: Event,
-    pubkey: string
+    pubkey: string,
+    privkey?: string
   ): Promise<void> {
     var nevent: NEvent = getBlankEvent();
     //Fill event fields
@@ -69,6 +70,14 @@ export class RelayPoolRepository {
       created_at: created_at.toNumber(),
     };
     //assign created at
+
+    if (kind === 4 && privkey) {
+      const tagReceptor = tags.find((tag) => {
+        return tag[0] === "p";
+      }) || [undefined, undefined];
+
+      nevent.content = encrypt(privkey, tagReceptor[1], content);
+    }
 
     const cb: PoolPublishCallback = (status, relay) => {
       if (status === 1) {
@@ -140,7 +149,7 @@ export class RelayPoolRepository {
             created_at: EventDate.fromNumber(NsEvent.created_at),
             author: NsEvent.pubkey,
           };
-          if (privkey) {
+          if (privkey && event.kind === 4) {
             event.content = decrypt(privkey, NsEvent.pubkey, NsEvent.content);
           }
           cbSub(event);
