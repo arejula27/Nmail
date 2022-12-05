@@ -38,9 +38,6 @@ class MailUseCasesImpl implements MailUseCases {
     this.mails = [];
     this.listeners = {};
     this.profileUseCase = ProfileUseCasesImpl.Execute;
-    const myPubAddr: string = this.profileUseCase.getPublicKey() as string;
-    const myPrivAddr: string = this.profileUseCase.getPrivateKey() as string;
-    this.getMailListTo(myPubAddr, myPrivAddr);
   }
   getMails(): MailData[] {
     const mailList = [...this.mails];
@@ -75,7 +72,7 @@ class MailUseCasesImpl implements MailUseCases {
     return this._instance || (this._instance = new this());
   }
 
-  private getMailListTo = (address: string, privkey?: string): void => {
+  getMailListTo = (address: string, privkey?: string): void => {
     const filter: Filter = {
       kinds: [4],
       "#p": [address],

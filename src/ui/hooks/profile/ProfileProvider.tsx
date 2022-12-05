@@ -21,12 +21,12 @@ export const ProfileProvider: FC<PropsWithChildren> = ({ children }) => {
   const useCaseAuth = ProfileUseCasesImpl.Execute;
 
   useEffect(() => {
-    useCaseAuth.setPrivateKey(state.privateKey);
-    useCaseAuth.setPublicKey(state.publicKey);
-    reloadUser();
+    if (state.publicKey !== null) reloadUser();
   }, [state.privateKey]);
 
   const handleLogin = (publicKey: string, privateKey: string) => {
+    useCaseAuth.setPrivateKey(state.privateKey);
+    useCaseAuth.setPublicKey(state.publicKey);
     setSate({ ...state, publicKey: publicKey, privateKey: privateKey });
   };
 
