@@ -30,9 +30,6 @@ export class ProfileUseCasesImpl implements ProfileUseCases {
   getPrivateKey = (): string | null => localStorage.getItem(PRIVATE_KEY);
 
   setPrivateKey(key: string | null): void {
-    console.log("setPrivate");
-    console.log(key);
-
     if (key === null) {
       this.relayRepo.setPrivateKey("");
       localStorage.removeItem(PRIVATE_KEY);

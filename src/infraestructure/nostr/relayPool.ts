@@ -87,10 +87,13 @@ export class RelayPoolRepository {
         console.log(relay + " didn't save the event");
       }
     };
+
     this.pool.publish(nevent, cb);
   }
 
   setPrivateKey(key: string): void {
+    console.log("pool priv key " + key);
+
     this.pool.setPrivateKey(key);
   }
 

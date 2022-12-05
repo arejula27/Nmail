@@ -21,7 +21,12 @@ export const ProfileProvider: FC<PropsWithChildren> = ({ children }) => {
   const useCaseAuth = ProfileUseCasesImpl.Execute;
 
   useEffect(() => {
-    if (state.publicKey !== null) reloadUser();
+    if (state.publicKey !== null && state.privateKey !== null) {
+      //get User data (name, picture,etc.)
+      reloadUser();
+      //save privkey on pool
+      useCaseAuth.setPrivateKey(state.privateKey);
+    }
   }, [state.privateKey]);
 
   const handleLogin = (publicKey: string, privateKey: string) => {

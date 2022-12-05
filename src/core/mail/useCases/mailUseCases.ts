@@ -52,7 +52,10 @@ class MailUseCasesImpl implements MailUseCases {
 
   addListener(mailCB: getMailCallback): Listener {
     const id = Math.random().toString().slice(2);
-    const deleteListener = () => delete this.listeners[id];
+    const deleteListener = () => {
+      delete this.listeners[id];
+      this.mails = [];
+    };
     this.listeners[id] = {
       cb: mailCB,
       delete: deleteListener,
