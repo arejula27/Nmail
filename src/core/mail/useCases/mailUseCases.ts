@@ -54,7 +54,6 @@ class MailUseCasesImpl implements MailUseCases {
     const id = Math.random().toString().slice(2);
     const deleteListener = () => {
       delete this.listeners[id];
-      this.mails = [];
     };
     this.listeners[id] = {
       cb: mailCB,
