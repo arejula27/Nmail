@@ -33,7 +33,7 @@ export const MailCard: FC<Props> = ({ mail, selected }) => {
         <h2 className="font-bold text-ellipsis flex h-8 justify-start ">
           {mail.author?.name}
         </h2>
-        <h2 className="flex justify-start ">{mail.title}</h2>
+        <h2 className="flex justify-start ">{mail.mail.title}</h2>
       </div>
     </button>
   );

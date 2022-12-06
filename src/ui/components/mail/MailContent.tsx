@@ -28,7 +28,7 @@ export const MailContent: FC<Props> = ({ mail }) => {
         >
           <img src={LeftIcon} width={30} alt="Back icon" />
         </button>
-        <h1 className="text-3xl font-bold mx-3 ">{mail.title}</h1>
+        <h1 className="text-3xl font-bold mx-3 ">{mail.mail.title}</h1>
       </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
@@ -49,7 +49,9 @@ export const MailContent: FC<Props> = ({ mail }) => {
         </div>
       </div>
       <Divider />
-      <p>{mail.content}</p>
+      {mail.mail.content.split("\n").map((line, idx) => (
+        <p key={idx}>{line}</p>
+      ))}
     </div>
   );
 };
