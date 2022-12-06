@@ -92,8 +92,6 @@ export class RelayPoolRepository {
   }
 
   setPrivateKey(key: string): void {
-    console.log("pool priv key " + key);
-
     this.pool.setPrivateKey(key);
   }
 

@@ -27,8 +27,6 @@ export default function InboxPage() {
   });
 
   useEffect(() => {
-    console.log("load mail");
-
     MailUseCasesImpl.Execute.getMailListTo(
       useAuth.publicKey!,
       useAuth.privateKey!
@@ -40,8 +38,6 @@ export default function InboxPage() {
     });
 
     return () => {
-      console.log("delete");
-
       sub.delete();
     };
   }, [useAuth.privateKey]);

@@ -31,8 +31,6 @@ export const GetMailFromString = (text: string): Mail | undefined => {
     if (line.startsWith(keys.title)) {
       title = line.replace(keys.title, "");
     } else {
-      console.log(line);
-
       content += line + "\n";
     }
   });
