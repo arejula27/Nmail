@@ -32,7 +32,7 @@ type NEvent = NstEvent & { signature?: string; id?: string };
 export class RelayPoolRepository {
   private static _instance: RelayPoolRepository;
   pool: NPool;
-  private sub?: Subscription;
+  private mainSub?: Subscription;
 
   private constructor() {
     this.pool = relayPool() as NPool;
@@ -143,7 +143,7 @@ export class RelayPoolRepository {
   }
 
   subscribe(filter: Filter, cbSub: subscriptionCallBack, privkey?: string) {
-    if (!this.sub) {
+    if (!this.mainSub) {
       const opts: SubscriptionOptions = {
         cb: function (NsEvent: NEvent, relay: string): void {
           const event: Event = {
@@ -172,7 +172,12 @@ export class RelayPoolRepository {
         skipVerification: false,
       };
 
-      this.sub = this.pool.sub(opts);
+      this.mainSub = this.pool.sub(opts);
     }
+  }
+
+  unsubscribe() {
+    this.mainSub?.unsub;
+    this.mainSub = undefined;
   }
 }

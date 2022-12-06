@@ -8,6 +8,7 @@ export interface ProfileUseCases {
   setPrivateKey(key: string | null): void;
   setPublicKey(key: string | null): void;
   getUSerProfileInfo(pubkey: string): Promise<User>;
+  removeConections(): void;
 }
 
 const PRIVATE_KEY = "privKey";
@@ -55,5 +56,9 @@ export class ProfileUseCasesImpl implements ProfileUseCases {
     const user: User = JSON.parse(event.content);
 
     return user;
+  }
+
+  removeConections(): void {
+    this.relayRepo.unsubscribe();
   }
 }

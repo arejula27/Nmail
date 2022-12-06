@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { FC, PropsWithChildren } from "react";
+import { MailUseCasesImpl } from "../../../core/mail/useCases/mailUseCases";
 import { User } from "../../../core/profile/domain";
 import { ProfileUseCasesImpl } from "../../../core/profile/useCases/ProfileUseCase";
 import { ProfileContext } from "./ProfileContext";
@@ -39,6 +40,8 @@ export const ProfileProvider: FC<PropsWithChildren> = ({ children }) => {
     useCaseAuth.setPublicKey(null);
     useCaseAuth.setPrivateKey(null);
     setSate({ ...state, publicKey: null, privateKey: null });
+    useCaseAuth.removeConections();
+    MailUseCasesImpl.Execute.clearMailList();
   };
   const reloadUser = () => {
     useCaseAuth.getUSerProfileInfo(state.publicKey!).then((user) => {

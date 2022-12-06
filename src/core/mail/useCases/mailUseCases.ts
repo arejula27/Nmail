@@ -24,6 +24,7 @@ export interface MailUseCases {
   // getMailListTo(address: string, privkey?: string): void;
   getMails(): MailData[];
   sendMail(mail: MailContentValues, pubkey: string): void;
+  clearMailList(): void;
 }
 
 class MailUseCasesImpl implements MailUseCases {
@@ -115,6 +116,10 @@ class MailUseCasesImpl implements MailUseCases {
     };
 
     this.relayRepo.sendEvent(event, pubkey, privkey);
+  }
+
+  clearMailList(): void {
+    this.mails = [];
   }
 }
 
